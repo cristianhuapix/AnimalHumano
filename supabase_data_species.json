@@ -1,0 +1,62 @@
+[
+  {
+    "id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Perro",
+    "code": "PER",
+    "created_at": "2025-10-04T17:33:10.637178+00:00"
+  },
+  {
+    "id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Gato",
+    "code": "GAT",
+    "created_at": "2025-10-04T17:33:10.860939+00:00"
+  },
+  {
+    "id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Ave",
+    "code": "AVE",
+    "created_at": "2025-10-04T17:33:11.062049+00:00"
+  },
+  {
+    "id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Conejo",
+    "code": "CON",
+    "created_at": "2025-10-04T17:33:11.270507+00:00"
+  },
+  {
+    "id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Reptil",
+    "code": "REP",
+    "created_at": "2025-10-04T17:33:11.487138+00:00"
+  },
+  {
+    "id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Pez",
+    "code": "PEZ",
+    "created_at": "2025-10-04T17:33:11.693435+00:00"
+  },
+  {
+    "id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Caballo",
+    "code": "CAB",
+    "created_at": "2025-10-04T17:33:11.885955+00:00"
+  },
+  {
+    "id": "7e1dbe7f-6281-4c90-bc2d-6b4dc52d1a50",
+    "name": "Hámster",
+    "code": "HAM",
+    "created_at": "2025-10-04T17:33:12.087989+00:00"
+  },
+  {
+    "id": "39c51039-0f5b-4143-9009-1503d6d3221d",
+    "name": "Cobayo",
+    "code": "COB",
+    "created_at": "2025-10-04T17:33:12.303265+00:00"
+  },
+  {
+    "id": "67caf1c7-c770-4933-8eb1-f1a08e0f15ed",
+    "name": "Hurón",
+    "code": "HUR",
+    "created_at": "2025-10-04T17:33:12.489194+00:00"
+  }
+]

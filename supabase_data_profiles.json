@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "email": "cmiguens@itba.edu.ar",
+    "full_name": "Cristian Miguens",
+    "first_name": "Cristian",
+    "last_name": "Miguens",
+    "phone": "+541169386734",
+    "address": null,
+    "city": "Victoria",
+    "country": "AR",
+    "language": "es",
+    "photo_url": null,
+    "is_admin": true,
+    "is_provider": true,
+    "is_deleted": false,
+    "created_at": "2025-10-04T18:11:12.232446+00:00",
+    "updated_at": "2025-10-05T13:10:31.584011+00:00"
+  },
+  {
+    "id": "d9a31539-c377-467a-99e2-787ef3c96807",
+    "email": "cristian.miguens@huapixsolutions.com",
+    "full_name": "Milagros Gonzalez",
+    "first_name": "Milagros",
+    "last_name": "Gonzalez",
+    "phone": "+541169386734",
+    "address": null,
+    "city": "Pehuajó",
+    "country": "AR",
+    "language": "es",
+    "photo_url": null,
+    "is_admin": false,
+    "is_provider": false,
+    "is_deleted": false,
+    "created_at": "2025-10-07T12:18:08.472475+00:00",
+    "updated_at": "2025-10-07T12:18:08.472475+00:00"
+  }
+]

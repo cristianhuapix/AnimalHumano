@@ -1,0 +1,281 @@
+<div class="pet-detail-container container">
+  @if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="spinner"></div>
+  }
+
+  @else if (pet()) {
+    <div class="pet-detail-card">
+      <!-- Header with actions -->
+      <div class="header">
+        <button routerLink="/pets" class="btn-back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+        <div class="actions">
+          <button (click)="showVaccines()" class="btn-icon btn-vaccines" title="Vacunas" [disabled]="!isFeatureEnabled('vaccines')" [class.disabled]="!isFeatureEnabled('vaccines')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 2 4 4"></path>
+              <path d="m17 7 3-3"></path>
+              <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5"></path>
+              <path d="m9 11 4 4"></path>
+              <path d="m5 19-3 3"></path>
+              <path d="m14 4 6 6"></path>
+            </svg>
+          </button>
+          <button (click)="showMedicalRecords()" class="btn-icon btn-medical" title="Registros Médicos" [disabled]="!isFeatureEnabled('medical')" [class.disabled]="!isFeatureEnabled('medical')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 2v2"></path>
+              <path d="M5 2v2"></path>
+              <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path>
+              <path d="M8 15a6 6 0 0 0 12 0v-3"></path>
+              <circle cx="20" cy="10" r="2"></circle>
+            </svg>
+          </button>
+          <button (click)="showQR()" class="btn-icon btn-qr" title="Código QR" [disabled]="hasProviderAccess()" [class.disabled]="hasProviderAccess()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="5" height="5" x="3" y="3" rx="1"></rect>
+              <rect width="5" height="5" x="16" y="3" rx="1"></rect>
+              <rect width="5" height="5" x="3" y="16" rx="1"></rect>
+              <path d="M21 16h-3a2 2 0 0 0-2 2v3"></path>
+              <path d="M21 21v.01"></path>
+              <path d="M12 7v3a2 2 0 0 1-2 2H7"></path>
+              <path d="M3 12h.01"></path>
+              <path d="M12 3h.01"></path>
+              <path d="M12 16v.01"></path>
+              <path d="M16 12h1"></path>
+              <path d="M21 12v.01"></path>
+              <path d="M12 21v-1"></path>
+            </svg>
+          </button>
+          <button (click)="editPhoto()" class="btn-icon btn-edit-photo" title="Editar foto" [disabled]="hasProviderAccess()" [class.disabled]="hasProviderAccess()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+              <circle cx="9" cy="9" r="2"></circle>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+            </svg>
+          </button>
+          <button (click)="editDocuments()" class="btn-icon btn-edit-docs" title="Editar documentos" [disabled]="hasProviderAccess()" [class.disabled]="hasProviderAccess()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </button>
+          <button (click)="openDeleteModal()" class="btn-icon btn-delete" title="Eliminar mascota" [disabled]="hasProviderAccess()" [class.disabled]="hasProviderAccess()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 11v6"></path>
+              <path d="M14 11v6"></path>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+              <path d="M3 6h18"></path>
+              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pet Info -->
+      <div class="pet-content">
+        <!-- Photo Section -->
+        <div class="photo-section">
+          @if (pet()!.photo_url) {
+            <img [src]="pet()!.photo_url" [alt]="pet()!.name" class="pet-photo">
+          } @else {
+            <div class="placeholder-photo">
+              {{ pet()!.name.charAt(0).toUpperCase() }}
+            </div>
+          }
+        </div>
+
+        <!-- Details Section -->
+        <div class="details-section">
+          <h1>{{ pet()!.name }}</h1>
+
+          <div class="toggles-section">
+            <div class="toggle-item" [class.disabled]="hasProviderAccess()">
+              <label class="toggle-label">
+                <span>Tiene Pedigree</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" [attr.checked]="pet()!.has_pedigree ? '' : null" [checked]="pet()!.has_pedigree" (change)="updatePedigree($event)" [disabled]="hasProviderAccess()">
+                  <span class="slider"></span>
+                </label>
+              </label>
+            </div>
+
+            <div class="toggle-item" [class.disabled]="hasProviderAccess()">
+              <label class="toggle-label">
+                <span>Disponible para Cruza</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" [attr.checked]="pet()!.crossable ? '' : null" [checked]="pet()!.crossable" (change)="updateCrossable($event)" [disabled]="hasProviderAccess()">
+                  <span class="slider"></span>
+                </label>
+              </label>
+            </div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="label">Especie:</span>
+              <span class="value">{{ pet()!.species?.name || 'N/A' }}</span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Raza:</span>
+              <span class="value">{{ pet()!.breed?.name || 'N/A' }}</span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Sexo:</span>
+              <span class="value">{{ pet()!.sex === 'M' ? 'Macho' : 'Hembra' }}</span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Edad:</span>
+              <span class="value">{{ getAge(pet()!.birth_date) }}</span>
+            </div>
+
+            <div class="info-item">
+              <span class="label">Fecha de Nacimiento:</span>
+              <span class="value">{{ formatDate(pet()!.birth_date) }}</span>
+            </div>
+
+            @if (pet()!.dnia) {
+              <div class="info-item">
+                <span class="label">DNIA:</span>
+                <span class="value">{{ pet()!.dnia }}</span>
+              </div>
+            }
+
+            @if (pet()!.papers_url) {
+              <div class="info-item full-width">
+                <span class="label">Documentos:</span>
+                <a [href]="pet()!.papers_url" target="_blank" class="value link">
+                  Ver Documentos →
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- Photo Selection Modal -->
+  @if (showPhotoModal()) {
+    <div class="modal-overlay" (click)="closePhotoModal()">
+      <div class="modal-content modal-photo-selection" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Seleccionar Foto</h3>
+          <button class="btn-close" (click)="closePhotoModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body photo-options">
+          <button class="photo-option" (click)="selectPhotoFromFile()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Elegir desde archivos</span>
+          </button>
+          <button class="photo-option" (click)="openCamera()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <span>Tomar foto con cámara</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Camera Modal -->
+  @if (showCameraModal()) {
+    <div class="modal-overlay camera-overlay" (click)="closeCameraModal()">
+      <div class="modal-content modal-camera" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Tomar Foto</h3>
+          <button class="btn-close" (click)="closeCameraModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body camera-body">
+          <video #videoElement autoplay playsinline class="camera-video"></video>
+          <canvas #canvasElement style="display: none;"></canvas>
+        </div>
+        <div class="modal-footer camera-footer">
+          <button class="btn-cancel" (click)="closeCameraModal()">Cancelar</button>
+          <button class="btn-capture" (click)="capturePhoto()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+            Capturar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- QR Code Modal -->
+  @if (showQRModal()) {
+    <div class="modal-overlay" (click)="closeQRModal()">
+      <div class="modal-content modal-qr" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>{{ pet()?.name }}</h3>
+          <button class="btn-close" (click)="closeQRModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body qr-body">
+          <div class="qr-container">
+            <img [src]="qrCodeDataUrl()" alt="QR Code" class="qr-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Delete Confirmation Modal -->
+  @if (showDeleteModal()) {
+    <div class="modal-overlay" (click)="closeDeleteModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Confirmar Eliminación</h3>
+          <button class="btn-close" (click)="closeDeleteModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que quieres eliminar a <strong>{{ pet()?.name }}</strong>?</p>
+          <p class="warning-text">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeDeleteModal()">Cancelar</button>
+          <button class="btn-confirm-delete" (click)="confirmDelete()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

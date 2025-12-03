@@ -1,0 +1,184 @@
+<div class="conversations-container">
+  <!-- Left sidebar - Conversations list -->
+  <div class="conversations-sidebar">
+    <div class="sidebar-header">
+      <h2>Conversaciones</h2>
+    </div>
+
+    <!-- Search box -->
+    <div class="search-box">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Buscar conversaciones..."
+        class="search-input"
+      />
+    </div>
+
+    <!-- Conversations list -->
+    <div class="conversations-list">
+      @if (loading()) {
+        <div class="loading">Cargando conversaciones...</div>
+      } @else if (filteredConversations().length === 0) {
+        <div class="empty-state">
+          <p>No tienes conversaciones</p>
+        </div>
+      } @else {
+        @for (conversation of filteredConversations(); track conversation.id) {
+          <div
+            class="conversation-item"
+            [class.active]="selectedConversation()?.id === conversation.id"
+            [class.unread]="conversation.unread_count > 0"
+            (click)="selectConversation(conversation)">
+
+            <!-- Avatar with initials -->
+            <div class="avatar">
+              @if (getParticipantPhoto(conversation)) {
+                <img [src]="getParticipantPhoto(conversation)!" alt="Avatar">
+              } @else {
+                <div class="avatar-initials">
+                  {{ getInitials(getParticipantName(conversation)) }}
+                </div>
+              }
+            </div>
+
+            <!-- Conversation info -->
+            <div class="conversation-info">
+              <div class="conversation-header">
+                <h3 class="conversation-name">
+                  {{ getParticipantName(conversation) }}
+                </h3>
+                @if (conversation.last_message) {
+                  <span class="conversation-date">
+                    {{ formatDate(conversation.last_message.created_at) }}
+                  </span>
+                }
+              </div>
+
+              @if (conversation.last_message) {
+                <p class="conversation-preview">
+                  {{ conversation.last_message.content }}
+                </p>
+              }
+            </div>
+
+            <!-- Unread badge -->
+            @if (conversation.unread_count > 0) {
+              <div class="unread-badge">
+                {{ conversation.unread_count }}
+              </div>
+            }
+
+            <!-- Delete button -->
+            <button
+              class="delete-btn"
+              (click)="openDeleteModal(conversation.id, $event)"
+              title="Eliminar conversación">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- Right side - Chat area -->
+  <div class="chat-area">
+    @if (selectedConversation()) {
+      <!-- Chat header -->
+      <div class="chat-header">
+        <div class="chat-participant">
+          <div class="avatar avatar-small">
+            @if (getParticipantPhoto(selectedConversation()!)) {
+              <img [src]="getParticipantPhoto(selectedConversation()!)!" alt="Avatar">
+            } @else {
+              <div class="avatar-initials">
+                {{ getInitials(getParticipantName(selectedConversation()!)) }}
+              </div>
+            }
+          </div>
+          <div class="participant-info">
+            <h3>{{ getParticipantName(selectedConversation()!) }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages area -->
+      <div class="chat-messages">
+        @for (message of messages(); track message.id) {
+          <div class="message" [class.my-message]="isMyMessage(message)">
+            <div class="message-bubble">
+              <p class="message-content">{{ message.content }}</p>
+              <span class="message-time">{{ formatDate(message.created_at) }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Message input -->
+      <div class="chat-input">
+        <input
+          type="text"
+          [(ngModel)]="newMessage"
+          (keydown.enter)="sendMessage()"
+          placeholder="Escribe un mensaje..."
+          class="message-input"
+        />
+        <button
+          class="send-btn"
+          (click)="sendMessage()"
+          [disabled]="!newMessage().trim()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    } @else {
+      <!-- Empty state -->
+      <div class="chat-empty">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <h3>Selecciona una conversación</h3>
+        <p>Elige un chat para empezar a hablar</p>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Delete confirmation modal -->
+@if (showDeleteModal()) {
+  <div class="modal-overlay" (click)="closeDeleteModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Eliminar conversación</h3>
+        <button class="close-btn" (click)="closeDeleteModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que quieres eliminar esta conversación?</p>
+        <p class="modal-note">Esta acción solo la eliminará de tu lista. El otro usuario seguirá viéndola.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeDeleteModal()">
+          Cancelar
+        </button>
+        <button class="btn btn-danger" (click)="confirmDelete()">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+}

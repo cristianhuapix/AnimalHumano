@@ -1,0 +1,244 @@
+<div class="qr-scanner-container">
+  <button class="btn-close" (click)="close()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <!-- STEP 1: Service Selection -->
+  @if (showServiceSelection()) {
+    <div class="service-selection">
+      <div class="selection-header">
+        <h2>📋 Seleccionar Servicio</h2>
+        <p class="subtitle">Elegí el servicio que vas a ejecutar</p>
+      </div>
+
+      @if (loadingServices()) {
+        <div class="loading-container">
+          <div class="spinner"></div>
+          <p>Cargando servicios...</p>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="error-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ errorMessage() }}
+        </div>
+      } @else if (myServices().length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">📦</div>
+          <p>No tenés servicios activos</p>
+          <p class="empty-hint">Agregá servicios en "Mis Servicios" primero</p>
+        </div>
+      } @else {
+        <div class="services-grid">
+          @for (service of myServices(); track service.id) {
+            <button class="service-card" (click)="selectService(service)">
+              <div class="service-icon">{{ service.service_type?.icon || '🔧' }}</div>
+              <div class="service-info">
+                <h3 class="service-name">
+                  {{ service.custom_name || 'Sin nombre' }}
+                  @if (service.service_type && service.service_type.category) {
+                    <span class="service-type-hint">({{ getCategoryInSpanish(service.service_type.category) }})</span>
+                  }
+                </h3>
+                <p class="service-category">{{ service.service_type?.name || 'Sin tipo' }}</p>
+              </div>
+              <svg class="chevron-right" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- STEP 2: QR Scanner -->
+  @if (showScanner()) {
+    <div class="scanner-card">
+      <div class="scanner-header">
+        <button class="btn-back" (click)="goBackToServices()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+        <div class="selected-service-info">
+          <span class="service-icon-small">{{ selectedService()?.service_type?.icon || '🔧' }}</span>
+          <span class="service-name-small">{{ selectedService()?.custom_name || selectedService()?.service_type?.name }}</span>
+        </div>
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          {{ errorMessage() }}
+          <button class="btn-retry" (click)="retry()">Reintentar</button>
+        </div>
+      }
+
+      @if (successMessage()) {
+        <div class="success-message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          {{ successMessage() }}
+        </div>
+      }
+
+      <div class="scanner-wrapper">
+        <div id="reader" #reader></div>
+
+        @if (isScanning()) {
+          <div class="scanning-indicator">
+            <div class="scanner-line"></div>
+            <p>Buscando código QR...</p>
+          </div>
+        }
+      </div>
+
+      <p class="access-note">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        El acceso expirará en 2 horas
+      </p>
+    </div>
+  }
+</div>
+
+<!-- Boarding Modal - Outside the container to ensure it's visible -->
+@if (showBoardingModal()) {
+  <div class="modal-overlay" (click)="closeBoardingModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>🏠 Registrar Hospedaje</h2>
+          <p class="subtitle">{{ scannedPetName() }}</p>
+          <button class="btn-close-modal" (click)="closeBoardingModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          @if (errorMessage()) {
+            <div class="error-message">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <div class="form-group">
+            <label for="start_date">Fecha de Inicio</label>
+            <input
+              type="date"
+              id="start_date"
+              [value]="boardingForm().start_date"
+              (input)="updateBoardingField('start_date', $any($event.target).value)"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label for="end_date">Fecha de Fin</label>
+            <input
+              type="date"
+              id="end_date"
+              [value]="boardingForm().end_date"
+              (input)="updateBoardingField('end_date', $any($event.target).value)"
+              required />
+          </div>
+
+          <div class="form-group readonly">
+            <label>Días Totales</label>
+            <div class="readonly-field">{{ boardingForm().days }}</div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Notas (opcional)</label>
+            <textarea
+              id="notes"
+              rows="3"
+              [value]="boardingForm().notes"
+              (input)="updateBoardingField('notes', $any($event.target).value)"
+              placeholder="Observaciones adicionales..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-secondary" (click)="closeBoardingModal()" [disabled]="savingBoarding()">
+            Cancelar
+          </button>
+          <button class="btn-primary" (click)="saveBoarding()" [disabled]="savingBoarding()">
+            @if (savingBoarding()) {
+              <span class="spinner-small"></span>
+              Guardando...
+            } @else {
+              Registrar Hospedaje
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+<!-- Simple Service Modal (Grooming, Training, Walks, Shelter, Petshop) -->
+@if (showSimpleServiceModal()) {
+  <div class="modal-overlay" (click)="closeSimpleServiceModal()">
+      <div class="modal-content modal-simple" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>📝 Registrar Servicio</h2>
+          <p class="subtitle">{{ scannedPetName() }}</p>
+          <button class="btn-close-modal" (click)="closeSimpleServiceModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          @if (errorMessage()) {
+            <div class="error-message">
+              {{ errorMessage() }}
+            </div>
+          }
+
+          <div class="form-group">
+            <label for="simple_notes">Notas (opcional)</label>
+            <textarea
+              id="simple_notes"
+              rows="4"
+              [value]="simpleServiceForm().notes"
+              (input)="simpleServiceForm.set({ notes: $any($event.target).value })"
+              placeholder="Agrega observaciones sobre el servicio..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-secondary" (click)="closeSimpleServiceModal()" [disabled]="savingSimpleService()">
+            Cancelar
+          </button>
+          <button class="btn-primary" (click)="saveSimpleService()" [disabled]="savingSimpleService()">
+            @if (savingSimpleService()) {
+              <span class="spinner-small"></span>
+              Guardando...
+            } @else {
+              Registrar
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }

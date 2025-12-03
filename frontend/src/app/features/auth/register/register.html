@@ -1,0 +1,140 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Crear Cuenta</h2>
+    <p class="subtitle">Únete a la comunidad de Animal Humano</p>
+
+    @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Selector de tipo de usuario - PRIMERO -->
+      <div class="form-group">
+        <label>Tipo de Usuario</label>
+        <div class="segment-group">
+          <button
+            type="button"
+            class="segment-button"
+            [class.active]="!registerForm.get('is_provider')?.value"
+            (click)="registerForm.patchValue({is_provider: false})">
+            <span class="icon">👤</span>
+            <span>Usuario</span>
+          </button>
+          <button
+            type="button"
+            class="segment-button"
+            [class.active]="registerForm.get('is_provider')?.value"
+            (click)="registerForm.patchValue({is_provider: true})">
+            <span class="icon">💼</span>
+            <span>Proveedor</span>
+          </button>
+        </div>
+        <small class="helper-text">
+          @if (!registerForm.get('is_provider')?.value) {
+            Registrate como usuario para gestionar tus mascotas
+          } @else {
+            Registrate como proveedor para ofrecer servicios
+          }
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Nombre</label>
+          <input
+            id="firstName"
+            type="text"
+            formControlName="first_name"
+            placeholder="Tu nombre"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Apellido</label>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="last_name"
+            placeholder="Tu apellido"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@email.com"
+          [class.invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        />
+        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+          <span class="error">Email inválido</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña *</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Mínimo 6 caracteres"
+          [class.invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        />
+        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          <span class="error">La contraseña debe tener al menos 6 caracteres</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="+54 11 1234-5678"
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">Ciudad</label>
+          <input
+            id="city"
+            type="text"
+            formControlName="city"
+            placeholder="Buenos Aires"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="country">País</label>
+          <select id="country" formControlName="country">
+            <option value="AR">Argentina</option>
+            <option value="UY">Uruguay</option>
+            <option value="CL">Chile</option>
+            <option value="BR">Brasil</option>
+          </select>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        @if (isLoading) {
+          <span>Registrando...</span>
+        } @else {
+          <span>Registrarse</span>
+        }
+      </button>
+    </form>
+
+    <div class="links">
+      <a routerLink="/auth/login">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,222 @@
+<div class="pet-form-container container">
+  <div class="form-card">
+    <h2>{{ isEditMode() ? 'Editar Mascota' : 'Agregar Nueva Mascota' }}</h2>
+
+    @if (errorMessage()) {
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
+      @if (!isEditMode()) {
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="name">Nombre *</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            [class.invalid]="isFieldInvalid('name')"
+            placeholder="Nombre de la mascota">
+          @if (isFieldInvalid('name')) {
+            <span class="error">{{ getFieldError('name') }}</span>
+          }
+        </div>
+
+        <!-- Fecha de Nacimiento -->
+        <div class="form-group">
+          <label for="birth_date">Fecha de Nacimiento *</label>
+          <input
+            type="date"
+            id="birth_date"
+            formControlName="birth_date"
+            [max]="maxDate"
+            [class.invalid]="isFieldInvalid('birth_date')">
+          @if (isFieldInvalid('birth_date')) {
+            <span class="error">{{ getFieldError('birth_date') }}</span>
+          }
+        </div>
+
+        <!-- Especie y Raza -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="species_id">Especie *</label>
+            <select
+              id="species_id"
+              formControlName="species_id"
+              [class.invalid]="isFieldInvalid('species_id')">
+              <option value="">Selecciona una especie</option>
+              @for (sp of species(); track sp.id) {
+                <option [value]="sp.id">{{ sp.name }}</option>
+              }
+            </select>
+            @if (isFieldInvalid('species_id')) {
+              <span class="error">{{ getFieldError('species_id') }}</span>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="breed_id">Raza *</label>
+            <select
+              id="breed_id"
+              formControlName="breed_id"
+              [class.invalid]="isFieldInvalid('breed_id')"
+              [disabled]="!petForm.get('species_id')?.value">
+              <option value="">Selecciona una raza</option>
+              @for (breed of filteredBreeds(); track breed.id) {
+                <option [value]="breed.id">{{ breed.name }}</option>
+              }
+            </select>
+            @if (isFieldInvalid('breed_id')) {
+              <span class="error">{{ getFieldError('breed_id') }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Campo para especificar otra especie -->
+        @if (showOtherSpecies()) {
+          <div class="form-group">
+            <label for="other_species_name">Especificar Especie *</label>
+            <input
+              type="text"
+              id="other_species_name"
+              formControlName="other_species_name"
+              placeholder="Ingresa el nombre de la especie"
+              [class.invalid]="isFieldInvalid('other_species_name')">
+            <small class="help-text">Esta especie será revisada por nuestro equipo antes de ser agregada al sistema.</small>
+            @if (isFieldInvalid('other_species_name')) {
+              <span class="error">{{ getFieldError('other_species_name') }}</span>
+            }
+          </div>
+        }
+
+        <!-- Campo para especificar otra raza -->
+        @if (showOtherBreed()) {
+          <div class="form-group">
+            <label for="other_breed_name">Especificar Raza *</label>
+            <input
+              type="text"
+              id="other_breed_name"
+              formControlName="other_breed_name"
+              placeholder="Ingresa el nombre de la raza"
+              [class.invalid]="isFieldInvalid('other_breed_name')">
+            <small class="help-text">Esta raza será revisada por nuestro equipo antes de ser agregada al sistema.</small>
+            @if (isFieldInvalid('other_breed_name')) {
+              <span class="error">{{ getFieldError('other_breed_name') }}</span>
+            }
+          </div>
+        }
+
+        <!-- Sexo (Switch) -->
+        <div class="form-group">
+          <label>Sexo *</label>
+          <div class="switch-group">
+            <button type="button"
+                    class="switch-btn"
+                    [class.active]="petForm.get('sex')?.value === 'M'"
+                    (click)="petForm.patchValue({sex: 'M'})">
+              Macho
+            </button>
+            <button type="button"
+                    class="switch-btn"
+                    [class.active]="petForm.get('sex')?.value === 'F'"
+                    (click)="petForm.patchValue({sex: 'F'})">
+              Hembra
+            </button>
+          </div>
+        </div>
+      }
+
+
+      <!-- Switches -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="switch-container">
+            <span>Tiene Pedigree</span>
+            <label class="toggle-switch">
+              <input type="checkbox" formControlName="has_pedigree">
+              <span class="slider"></span>
+            </label>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="switch-container">
+            <span>Disponible para Cruza</span>
+            <label class="toggle-switch">
+              <input type="checkbox" formControlName="crossable">
+              <span class="slider"></span>
+            </label>
+          </label>
+        </div>
+      </div>
+
+      <!-- Foto -->
+      <div class="form-group">
+        <label>Foto de la Mascota</label>
+        <div class="file-input-group">
+          <input
+            type="file"
+            id="photo_file"
+            accept="image/*"
+            (change)="onPhotoSelected($event)"
+            #photoInput>
+          <button type="button" class="btn-file" (click)="photoInput.click()">
+            📁 Seleccionar Foto
+          </button>
+          <button type="button" class="btn-camera" (click)="toggleCamera()">
+            📷 {{ showCamera ? 'Cerrar Cámara' : 'Tomar Foto' }}
+          </button>
+        </div>
+        @if (selectedPhotoName) {
+          <small class="file-name">{{ selectedPhotoName }}</small>
+        }
+
+        <!-- Camera Preview -->
+        @if (showCamera) {
+          <div class="camera-container">
+            <video #videoElement autoplay playsinline></video>
+            <canvas #canvasElement style="display: none;"></canvas>
+            <button type="button" class="btn-capture" (click)="capturePhoto()">
+              📸 Capturar Foto
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Documentos -->
+      <div class="form-group">
+        <label>Documentos (Pedigree, Vacunas, etc.)</label>
+        <div class="file-input-group">
+          <input
+            type="file"
+            id="papers_file"
+            accept=".pdf,.jpg,.jpeg,.png"
+            (change)="onPapersSelected($event)"
+            #papersInput>
+          <button type="button" class="btn-file" (click)="papersInput.click()">
+            📁 Seleccionar Documentos
+          </button>
+        </div>
+        @if (selectedPapersName) {
+          <small class="file-name">{{ selectedPapersName }}</small>
+        }
+      </div>
+
+      <!-- Botones -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()" [disabled]="isLoading()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="isLoading()">
+          @if (isLoading()) {
+            Guardando...
+          } @else {
+            {{ isEditMode() ? 'Actualizar' : 'Guardar' }}
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

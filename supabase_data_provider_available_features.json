@@ -1,0 +1,137 @@
+[
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "lost_pets",
+    "name": "Mascotas Perdidas",
+    "description": "Ver mascotas perdidas en mi zona",
+    "icon": "🔍",
+    "route": "/lost-pets",
+    "is_base_feature": true
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_ratings",
+    "name": "Mis Calificaciones",
+    "description": "Ver y responder calificaciones",
+    "icon": "⭐",
+    "route": "/providers/my-ratings",
+    "is_base_feature": true
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_chats",
+    "name": "Mis Chats",
+    "description": "Mensajes con clientes",
+    "icon": "💬",
+    "route": "/providers/my-chats",
+    "is_base_feature": true
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_services",
+    "name": "Mis Servicios",
+    "description": "Gestionar servicios que ofrezco",
+    "icon": "💼",
+    "route": "/providers/my-services",
+    "is_base_feature": true
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "lost_pets",
+    "name": "Mascotas Perdidas",
+    "description": "Ver mascotas perdidas en mi zona",
+    "icon": "🔍",
+    "route": "/lost-pets",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_ratings",
+    "name": "Mis Calificaciones",
+    "description": "Ver y responder calificaciones",
+    "icon": "⭐",
+    "route": "/providers/my-ratings",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_chats",
+    "name": "Mis Chats",
+    "description": "Mensajes con clientes",
+    "icon": "💬",
+    "route": "/providers/my-chats",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_trainings",
+    "name": "Mis Entrenamientos",
+    "description": "Gestionar sesiones y planes de entrenamiento",
+    "icon": "🎓",
+    "route": "/providers/my-trainings",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_medical_records",
+    "name": "Mis Historias",
+    "description": "Historias clínicas de mascotas",
+    "icon": "📋",
+    "route": "/providers/my-medical-records",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "boarding_history",
+    "name": "Mis Hospedajes",
+    "description": "Ver el historial de hospedajes de mis clientes",
+    "icon": "🏠",
+    "route": "/providers/my-boarding",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_walks",
+    "name": "Mis Paseos",
+    "description": "Gestionar paseos programados",
+    "icon": "🐕",
+    "route": "/providers/my-walks",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_shelter",
+    "name": "Mis Refugios/Adopciones",
+    "description": "Gestionar animales en adopción y solicitudes",
+    "icon": "🏡",
+    "route": "/providers/my-shelter",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_services",
+    "name": "Mis Servicios",
+    "description": "Gestionar servicios que ofrezco",
+    "icon": "💼",
+    "route": "/providers/my-services",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_grooming",
+    "name": "Mis Servicios de Estética",
+    "description": "Gestionar citas y servicios de peluquería",
+    "icon": "✂️",
+    "route": "/providers/my-grooming",
+    "is_base_feature": false
+  },
+  {
+    "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+    "code": "my_vaccines",
+    "name": "Mis Vacunas",
+    "description": "Registro de vacunación",
+    "icon": "💉",
+    "route": "/providers/my-vaccines",
+    "is_base_feature": false
+  }
+]

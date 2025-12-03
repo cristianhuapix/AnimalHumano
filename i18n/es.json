@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Animal Humano",
+    "languages": {
+      "es": "Español",
+      "en": "Inglés",
+      "pt": "Portugués"
+    }
+  },
+  "nav": {
+    "pets": "Mis Mascotas",
+    "services": "Buscar Servicios",
+    "chats": "Mis Chats",
+    "calendar": "Calendario",
+    "lost": "Mascotas Perdidas",
+    "walks": "Mis Paseos",
+    "breeding": "Cruces"
+  },
+  "pet": {
+    "dnia": "DNIA",
+    "withPapers": "Con papeles",
+    "crossable": "Apto cruce",
+    "species": "Especie",
+    "breed": "Raza",
+    "sex": "Sexo",
+    "male": "Macho",
+    "female": "Hembra"
+  },
+  "vet": {
+    "license": "Matrícula",
+    "verified": "Verificada"
+  },
+  "breeding": {
+    "filters": {
+      "species": "Especie",
+      "breed": "Raza",
+      "withPapers": "Con papeles",
+      "sex": "Sexo"
+    },
+    "contact": "Contactar",
+    "intentSent": "Intención enviada"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "all": "Habilitar todas",
+    "chat": "Chat",
+    "vaccReq": "Vacunas obligatorias",
+    "vaccOpt": "Vacunas opcionales",
+    "appointments": "Citas",
+    "lostNear": "Perdidos cercanos"
+  },
+  "calendar": {
+    "appointments": "Citas",
+    "vaccinesRequired": "Obligatorias",
+    "vaccinesOptional": "Opcionales",
+    "medication": "Medicación"
+  }
+}

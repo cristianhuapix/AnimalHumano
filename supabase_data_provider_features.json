@@ -1,0 +1,110 @@
+[
+  {
+    "id": "7db3a44e-68d4-4270-8be9-8d5ead488f24",
+    "code": "my_services",
+    "name": "Mis Servicios",
+    "description": "Gestionar servicios que ofrezco",
+    "icon": "💼",
+    "route": "/providers/my-services",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "1201f347-ca20-4bc1-9322-ff2d3b9012b0",
+    "code": "my_chats",
+    "name": "Mis Chats",
+    "description": "Mensajes con clientes",
+    "icon": "💬",
+    "route": "/providers/my-chats",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "40710084-f2db-45cf-9288-1e2b835eecfc",
+    "code": "lost_pets",
+    "name": "Mascotas Perdidas",
+    "description": "Ver mascotas perdidas en mi zona",
+    "icon": "🔍",
+    "route": "/lost-pets",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "36897928-491b-4686-89d9-05a4341863b6",
+    "code": "my_ratings",
+    "name": "Mis Calificaciones",
+    "description": "Ver y responder calificaciones",
+    "icon": "⭐",
+    "route": "/providers/my-ratings",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "bd1f84da-e6e9-4a48-9dec-b9dafa6caad4",
+    "code": "my_trainings",
+    "name": "Mis Entrenamientos",
+    "description": "Gestionar sesiones y planes de entrenamiento",
+    "icon": "🎓",
+    "route": "/providers/my-trainings",
+    "created_at": "2025-10-08T21:26:19.654417+00:00"
+  },
+  {
+    "id": "2727811b-9c0a-4fda-9d1f-35930c08792e",
+    "code": "my_medical_records",
+    "name": "Mis Historias",
+    "description": "Historias clínicas de mascotas",
+    "icon": "📋",
+    "route": "/providers/my-medical-records",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "3efa9e13-9063-475a-8350-007efd08c2fc",
+    "code": "my_walks",
+    "name": "Mis Paseos",
+    "description": "Gestionar paseos programados",
+    "icon": "🐕",
+    "route": "/providers/my-walks",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "09db7ddf-d22f-429b-b0fe-c2de27e63947",
+    "code": "my_shelter",
+    "name": "Mis Refugios/Adopciones",
+    "description": "Gestionar animales en adopción y solicitudes",
+    "icon": "🏡",
+    "route": "/providers/my-shelter",
+    "created_at": "2025-10-08T21:26:18.768593+00:00"
+  },
+  {
+    "id": "c5fcdd17-9da1-4359-9687-104d3ccfd915",
+    "code": "my_grooming",
+    "name": "Mis Servicios de Estética",
+    "description": "Gestionar citas y servicios de peluquería",
+    "icon": "✂️",
+    "route": "/providers/my-grooming",
+    "created_at": "2025-10-08T21:26:20.520085+00:00"
+  },
+  {
+    "id": "deb26845-cfea-41cf-aa19-dd15b665b533",
+    "code": "my_vaccines",
+    "name": "Mis Vacunas",
+    "description": "Registro de vacunación",
+    "icon": "💉",
+    "route": "/providers/my-vaccines",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "d848f601-eacc-40ab-ad68-71cd4973843d",
+    "code": "qr_scanner",
+    "name": "Escanear QR",
+    "description": "Escanear codigos QR de mascotas",
+    "icon": "📱",
+    "route": "/qr/scan",
+    "created_at": "2025-10-08T23:45:21.301919+00:00"
+  },
+  {
+    "id": "b0f39731-b56b-4e03-986b-78f24e12cdbe",
+    "code": "boarding_history",
+    "name": "Mis Hospedajes",
+    "description": "Ver el historial de hospedajes de mis clientes",
+    "icon": "🏠",
+    "route": "/providers/my-boarding",
+    "created_at": "2025-10-08T18:02:38.358671+00:00"
+  }
+]

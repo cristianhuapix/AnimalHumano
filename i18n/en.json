@@ -1,0 +1,58 @@
+{
+  "app": {
+    "title": "Animal Humano",
+    "languages": {
+      "es": "Spanish",
+      "en": "English",
+      "pt": "Portuguese"
+    }
+  },
+  "nav": {
+    "pets": "My Pets",
+    "services": "Find Services",
+    "chats": "My Chats",
+    "calendar": "Calendar",
+    "lost": "Lost Pets",
+    "walks": "My Walks",
+    "breeding": "Breeding"
+  },
+  "pet": {
+    "dnia": "ANID",
+    "withPapers": "With papers",
+    "crossable": "Breeding enabled",
+    "species": "Species",
+    "breed": "Breed",
+    "sex": "Sex",
+    "male": "Male",
+    "female": "Female"
+  },
+  "vet": {
+    "license": "License",
+    "verified": "Verified"
+  },
+  "breeding": {
+    "filters": {
+      "species": "Species",
+      "breed": "Breed",
+      "withPapers": "With papers",
+      "sex": "Sex"
+    },
+    "contact": "Contact",
+    "intentSent": "Request sent"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "all": "Enable all",
+    "chat": "Chat",
+    "vaccReq": "Required vaccines",
+    "vaccOpt": "Optional vaccines",
+    "appointments": "Appointments",
+    "lostNear": "Nearby lost pets"
+  },
+  "calendar": {
+    "appointments": "Appointments",
+    "vaccinesRequired": "Required",
+    "vaccinesOptional": "Optional",
+    "medication": "Medication"
+  }
+}

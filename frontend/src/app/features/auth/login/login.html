@@ -1,0 +1,86 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Accede a tu cuenta de Animal Humano</p>
+
+    @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Selector de modo de login - PRIMERO -->
+      <div class="form-group">
+        <label>Ingresar como</label>
+        <div class="segment-group">
+          <button
+            type="button"
+            class="segment-button"
+            [class.active]="!loginForm.get('login_as_provider')?.value"
+            (click)="loginForm.patchValue({login_as_provider: false})">
+            <span class="icon">👤</span>
+            <span>Usuario</span>
+          </button>
+          <button
+            type="button"
+            class="segment-button"
+            [class.active]="loginForm.get('login_as_provider')?.value"
+            (click)="loginForm.patchValue({login_as_provider: true})">
+            <span class="icon">💼</span>
+            <span>Proveedor</span>
+          </button>
+        </div>
+        <small class="helper-text">
+          @if (!loginForm.get('login_as_provider')?.value) {
+            Accede a tu panel de usuario
+          } @else {
+            Accede a tu panel de proveedor
+          }
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="tu@email.com"
+          [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        />
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <span class="error">Email inválido</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        />
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <span class="error">La contraseña es requerida</span>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        @if (isLoading) {
+          <span>Ingresando...</span>
+        } @else {
+          <span>Ingresar</span>
+        }
+      </button>
+    </form>
+
+    <div class="links">
+      <a routerLink="/auth/register">¿No tienes cuenta? Regístrate</a>
+    </div>
+  </div>
+</div>

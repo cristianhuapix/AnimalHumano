@@ -1,0 +1,160 @@
+<div class="report-form-container">
+  <div class="form-card">
+    <h1>Reportar Mascota</h1>
+
+    @if (errorMessage()) {
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+      <!-- Report Type Selection -->
+      <div class="form-group">
+        <label>Tipo de Reporte</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" formControlName="reportType" value="own">
+            <span>Perdí mi mascota</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" formControlName="reportType" value="found">
+            <span>Encontré una mascota</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Own Pet Selection -->
+      @if (isOwnPet()) {
+        <div class="form-group">
+          <label for="petId">Seleccioná tu mascota *</label>
+          <select id="petId" formControlName="petId" class="form-control">
+            <option value="">-- Seleccioná una mascota --</option>
+            @for (pet of myPets(); track pet.id) {
+              <option [value]="pet.id">{{ pet.name }} - {{ pet.species?.name }}</option>
+            }
+          </select>
+          @if (reportForm.get('petId')?.invalid && reportForm.get('petId')?.touched) {
+            <span class="error-text">Debés seleccionar una mascota</span>
+          }
+          @if (myPets().length === 0) {
+            <small class="form-text" style="color: #e74c3c;">
+              No tenés mascotas registradas. <a routerLink="/pets/new" style="color: #3498db;">Registrá una mascota</a> primero.
+            </small>
+          }
+        </div>
+      }
+
+      <!-- Found Pet Details -->
+      @if (!isOwnPet()) {
+        <div class="form-group">
+          <label for="speciesId">Especie *</label>
+          <select id="speciesId" formControlName="speciesId" class="form-control">
+            <option value="">-- Seleccioná una especie --</option>
+            @for (species of allSpecies(); track species.id) {
+              <option [value]="species.id">{{ species.name }}</option>
+            }
+          </select>
+          @if (reportForm.get('speciesId')?.invalid && reportForm.get('speciesId')?.touched) {
+            <span class="error-text">Debés seleccionar una especie</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="breedId">Raza (Opcional)</label>
+          <select id="breedId" formControlName="breedId" class="form-control" [disabled]="!reportForm.get('speciesId')?.value">
+            <option value="">-- Seleccioná una raza --</option>
+            @for (breed of filteredBreeds(); track breed.id) {
+              <option [value]="breed.id">{{ breed.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre (si tiene collar con nombre)</label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="Nombre de la mascota">
+        </div>
+
+        <!-- Camera Section -->
+        <div class="form-group">
+          <label>Foto de la mascota *</label>
+
+          @if (!capturedPhoto()) {
+            <button type="button" class="btn-camera" (click)="toggleCamera()">
+              📷 {{ showCamera() ? 'Cerrar Cámara' : 'Tomar Foto' }}
+            </button>
+
+            @if (showCamera()) {
+              <div class="camera-container">
+                <video #videoElement autoplay playsinline></video>
+                <button type="button" class="btn-capture" (click)="capturePhoto()">
+                  Capturar Foto
+                </button>
+              </div>
+              <canvas #canvasElement style="display: none;"></canvas>
+            }
+          } @else {
+            <div class="photo-preview">
+              <img [src]="capturedPhotoUrl()" alt="Foto capturada">
+              <button type="button" class="btn-remove-photo" (click)="removePhoto()">
+                ✕ Eliminar foto
+              </button>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Descripción *</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          rows="4"
+          [placeholder]="isOwnPet() ? 'Descripción de tu mascota, características distintivas, última vez que la viste, etc.' : 'Descripción de la mascota encontrada, características, comportamiento, etc.'">
+        </textarea>
+        @if (reportForm.get('description')?.invalid && reportForm.get('description')?.touched) {
+          <span class="error-text">La descripción es obligatoria</span>
+        }
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label for="lastSeenAddress">{{ isOwnPet() ? 'Última ubicación vista' : 'Ubicación donde la encontraste' }} *</label>
+        <input
+          type="text"
+          id="lastSeenAddress"
+          formControlName="lastSeenAddress"
+          class="form-control"
+          placeholder="Dirección o descripción del lugar">
+        @if (reportForm.get('lastSeenAddress')?.invalid && reportForm.get('lastSeenAddress')?.touched) {
+          <span class="error-text">La ubicación es obligatoria</span>
+        }
+        <small class="form-text">Tu ubicación actual se usa para ayudar a otros a encontrarla</small>
+      </div>
+
+      <!-- Contact Phone -->
+      <div class="form-group">
+        <label for="contactPhone">Teléfono de contacto (Opcional)</label>
+        <input
+          type="tel"
+          id="contactPhone"
+          formControlName="contactPhone"
+          class="form-control"
+          placeholder="+54 9 11 1234-5678">
+        <small class="form-text">También pueden contactarte por el chat de la app</small>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancel()" [disabled]="isSubmitting()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Creando reporte...' : 'Publicar Reporte' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

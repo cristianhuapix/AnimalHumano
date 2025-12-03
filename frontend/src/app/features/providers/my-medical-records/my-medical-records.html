@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="header-row">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1 class="page-title">📋 Mis Historias Clínicas</h1>
+    </div>
+    @if (petId()) {
+      <button (click)="addMedicalRecord()" class="btn-add">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path>
+          <path d="M5 12h14"></path>
+        </svg>
+        Agregar Historia Médica
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="text-center py-8">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <p class="mt-4 text-gray-600">Cargando historias clínicas...</p>
+    </div>
+  } @else if (error()) {
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (records().length === 0) {
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
+        <p class="text-xl text-gray-600 mb-4">📋 No hay historias clínicas registradas</p>
+        <p class="text-gray-500">Las historias clínicas aparecerán aquí cuando atiendas a tus pacientes.</p>
+      </div>
+    } @else {
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mascota</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dueño</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Diagnóstico</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tratamiento</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (record of records(); track record.id) {
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">{{ record.pet_name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ record.owner_name }}</td>
+                <td class="px-6 py-4">{{ record.diagnosis }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ record.date }}</td>
+                <td class="px-6 py-4">{{ record.treatment }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <button class="text-blue-600 hover:text-blue-900">Ver detalles</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (totalPages() > 1) {
+        <div class="mt-6 flex justify-center items-center space-x-2">
+          <button
+            (click)="goToPage(currentPage() - 1)"
+            [disabled]="currentPage() === 1"
+            class="px-4 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+            Anterior
+          </button>
+          <span class="px-4 py-2">
+            Página {{ currentPage() }} de {{ totalPages() }}
+          </span>
+          <button
+            (click)="goToPage(currentPage() + 1)"
+            [disabled]="currentPage() === totalPages()"
+            class="px-4 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+            Siguiente
+          </button>
+        </div>
+      }
+    }
+  }
+</div>

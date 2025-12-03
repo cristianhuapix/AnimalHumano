@@ -1,0 +1,44 @@
+[
+  {
+    "id": "bf871c38-747b-4324-a05c-00c5e4121f1b",
+    "category": "walking",
+    "feature_code": "my_walks",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "5f13542f-3442-4324-801e-b4a4422560fb",
+    "category": "veterinary",
+    "feature_code": "my_vaccines",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "dbb17980-af42-4ac0-930d-5ae05fb297ad",
+    "category": "veterinary",
+    "feature_code": "my_medical_records",
+    "created_at": "2025-10-08T00:06:38.374564+00:00"
+  },
+  {
+    "id": "f153624b-c878-4227-b374-a499a58fbe15",
+    "category": "boarding",
+    "feature_code": "boarding_history",
+    "created_at": "2025-10-08T18:02:38.358671+00:00"
+  },
+  {
+    "id": "23db58e6-54a9-458b-8bdc-504f49273373",
+    "category": "shelter",
+    "feature_code": "my_shelter",
+    "created_at": "2025-10-08T21:26:19.208191+00:00"
+  },
+  {
+    "id": "f3de1ff1-344b-4070-9815-cc18d1e3e46d",
+    "category": "training",
+    "feature_code": "my_trainings",
+    "created_at": "2025-10-08T21:26:20.074096+00:00"
+  },
+  {
+    "id": "de924b6b-098f-4ee0-9bbe-3498a585658e",
+    "category": "grooming",
+    "feature_code": "my_grooming",
+    "created_at": "2025-10-08T21:26:21.000963+00:00"
+  }
+]

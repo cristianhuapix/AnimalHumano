@@ -1,0 +1,20 @@
+species_name,name,required,description,interval_days,contagious_to_humans
+Perro,Antirrábica,true,Previene la rabia - Enfermedad viral mortal,365,true
+Perro,Séxtuple,true,Previene distemper/moquillo y parvovirus y hepatitis y leptospirosis y parainfluenza,365,false
+Perro,Óctuple,true,Previene distemper/moquillo y parvovirus y hepatitis y leptospirosis y parainfluenza y coronavirus,365,false
+Perro,Tos de las Perreras,false,Previene bordetella bronchiseptica,180,false
+Perro,Leishmaniasis,false,Previene leishmaniasis canina,365,false
+Perro,Leptospirosis,false,Previene leptospirosis,365,true
+Gato,Antirrábica,true,Previene la rabia - Enfermedad viral mortal,365,true
+Gato,Triple Felina,true,Previene panleucopenia/moquillo felino y rinotraqueítis y calicivirus,365,false
+Gato,Quíntuple Felina,true,Previene panleucopenia y rinotraqueítis y calicivirus y leucemia felina y clamidiosis,365,false
+Gato,Leucemia Felina,false,Previene FeLV - leucemia felina,365,false
+Gato,Peritonitis Infecciosa,false,Previene FIP - peritonitis infecciosa felina,365,false
+Conejo,Mixomatosis,true,Previene mixomatosis viral,180,false
+Conejo,Enfermedad Hemorrágica,true,Previene RHD - enfermedad hemorrágica viral,180,false
+Hurón,Moquillo,true,Previene distemper canino en hurones,365,false
+Hurón,Rabia,true,Previene rabia,365,true
+Caballo,Influenza Equina,true,Previene gripe equina,180,false
+Caballo,Tétanos,true,Previene tétanos,365,false
+Caballo,Encefalomielitis,true,Previene encefalitis viral equina,365,false
+Caballo,Rabia,false,Previene rabia,365,true

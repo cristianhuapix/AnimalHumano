@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cb9ec2c9-499a-4b05-b2c7-f122a7694a4a",
+    "report_id": "0d6bd5e1-a73a-4159-a05d-f042006c2e56",
+    "image_url": "https://nbuqowkkvmzzvgdxrzkm.supabase.co/storage/v1/object/public/pet-images/lost-pets/0d6bd5e1-a73a-4159-a05d-f042006c2e56/found-pet-1759838891785.jpg?",
+    "created_at": "2025-10-07T12:08:20.428305+00:00"
+  },
+  {
+    "id": "0c4208c7-68e9-41ba-a6db-979c5bf8b1df",
+    "report_id": "9ae8aa40-5703-458f-a0e6-32133d5cf841",
+    "image_url": "https://nbuqowkkvmzzvgdxrzkm.supabase.co/storage/v1/object/public/pet-images/lost-pets/9ae8aa40-5703-458f-a0e6-32133d5cf841/found-pet-1759838987313.jpg?",
+    "created_at": "2025-10-07T12:09:55.493802+00:00"
+  },
+  {
+    "id": "07067a5a-7dc0-4310-94b1-f3872dfa88af",
+    "report_id": "18cc6820-8d75-417e-aaa6-780c48e92fbf",
+    "image_url": "https://nbuqowkkvmzzvgdxrzkm.supabase.co/storage/v1/object/public/pet-images/lost-pets/18cc6820-8d75-417e-aaa6-780c48e92fbf/found-pet-1759848446039.jpg?",
+    "created_at": "2025-10-07T14:47:34.851906+00:00"
+  }
+]

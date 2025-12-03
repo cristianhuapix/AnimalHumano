@@ -1,0 +1,19 @@
+
+erDiagram
+  profiles ||--o{ pets : owns
+  pets ||--o{ pet_vaccinations : has
+  pets ||--o{ medical_records : has
+  pets ||--o{ pet_qr_codes : has
+  pets ||--o{ walks : has
+  species ||--o{ breeds : includes
+  species ||--o{ pets : typed
+  breeds ||--o{ pets : categorized
+  pets ||--o{ pet_breeding_intents : referenced
+  breeding_public ||--|| pets : indexes
+  providers ||--o{ provider_locations : has
+  providers ||--o{ availability_schedules : has
+  providers ||--o{ appointments : attends
+  profiles ||--o{ appointments : books
+  conversations ||--o{ messages : contains
+  conversations ||--o{ conversation_participants : includes
+  lost_pet_reports ||--o{ lost_pet_images : has

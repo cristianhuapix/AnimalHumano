@@ -1,0 +1,22 @@
+# Flask Framework
+Flask==3.0.3
+flask-cors==4.0.0
+
+# Supabase Client
+supabase==2.10.0
+
+# Environment
+python-dotenv==1.0.1
+
+# Google Maps (optional)
+googlemaps==4.10.0
+
+# Firebase Cloud Messaging (optional)
+firebase-admin==6.5.0
+
+# Utilities
+requests==2.32.3
+
+# Testing
+pytest==8.3.3
+pytest-flask==1.3.0

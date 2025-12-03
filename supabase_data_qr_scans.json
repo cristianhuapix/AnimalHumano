@@ -1,0 +1,506 @@
+[
+  {
+    "id": "c1880389-054b-4c4f-af16-0632c8d7dee3",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "9e09cf4a-2df2-4b61-93c8-c375dd252271",
+    "scanned_at": "2025-10-09T12:34:37.865827+00:00",
+    "expires_at": "2025-10-09T14:34:37.865827+00:00",
+    "scan_type": "owner",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "becc2678-d04d-4d51-8d18-e8cacf0bb714",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "2a71c856-7fa5-4718-8db7-2a2d3472422f",
+    "scanned_at": "2025-10-09T12:41:27.437514+00:00",
+    "expires_at": "2025-10-09T14:41:27.437514+00:00",
+    "scan_type": "owner",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "ea58895f-2b2f-4492-83ff-8193f91220b0",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "606605e4-753d-4f00-93e8-307c00bb6d57",
+    "scanned_at": "2025-10-09T13:14:07.594321+00:00",
+    "expires_at": "2025-10-09T15:14:07.594321+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "ebdf519d-849b-4156-ab8b-e40819514d8c",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "a01eee63-9f47-475e-bb1b-a3b3ae3eb7ea",
+    "scanned_at": "2025-10-09T13:18:14.74243+00:00",
+    "expires_at": "2025-10-09T15:18:14.74243+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "12542325-2755-449e-9f3f-4e1452615ae6",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "05054671-e0e6-4542-8b07-1d645eac28b9",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "2e8054e0-271c-4d2c-b8ff-ab740bbbd7e3",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "9f7f674b-ab47-45b8-9a2a-5733f8956488",
+    "scanned_at": "2025-10-09T13:24:12.754855+00:00",
+    "expires_at": "2025-10-09T15:24:12.754855+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "12542325-2755-449e-9f3f-4e1452615ae6",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "05054671-e0e6-4542-8b07-1d645eac28b9",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "edd44eef-ea8e-41eb-b583-c557dd2692a1",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "a31927fa-3ddf-4bea-8383-85f22055ee2e",
+    "scanned_at": "2025-10-09T13:26:18.181407+00:00",
+    "expires_at": "2025-10-09T15:26:18.181407+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "12542325-2755-449e-9f3f-4e1452615ae6",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "05054671-e0e6-4542-8b07-1d645eac28b9",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "202ce7e4-1844-406b-9265-adf021f0c44f",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "1d7f446e-f0a7-4a58-9acc-388b0b8843d7",
+    "scanned_at": "2025-10-09T13:28:28.354381+00:00",
+    "expires_at": "2025-10-09T15:28:28.354381+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "12542325-2755-449e-9f3f-4e1452615ae6",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "05054671-e0e6-4542-8b07-1d645eac28b9",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "1dc876ea-9794-4a75-ad94-5e3d5ca579a9",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "9ada0719-b6e7-4e33-8f1b-5dc976cb949f",
+    "scanned_at": "2025-10-09T17:53:21.388288+00:00",
+    "expires_at": "2025-10-09T19:53:21.388288+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "eb693bc6-a4b7-40f7-b368-fbf7acddb6b2",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "47ad2bbb-3f33-4b2a-a7f1-cedd816a0a79",
+    "scanned_at": "2025-10-09T18:11:14.085011+00:00",
+    "expires_at": "2025-10-09T20:11:14.085011+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "6d1ccddc-7d25-4683-b649-e39f1a5c4dd9",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "c4e3a9f0-7c81-458e-8954-5b82a724fa17",
+    "scanned_at": "2025-10-09T18:15:07.868955+00:00",
+    "expires_at": "2025-10-09T20:15:07.868955+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "12542325-2755-449e-9f3f-4e1452615ae6",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "05054671-e0e6-4542-8b07-1d645eac28b9",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "8073d065-64a6-4f6a-82e8-fc860d74e6eb",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "392dbdc7-c25b-48c1-9bb2-ac24d25d5809",
+    "scanned_at": "2025-10-09T18:18:05.575541+00:00",
+    "expires_at": "2025-10-09T20:18:05.575541+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "150f81f4-7fe4-4aed-b18b-ce1143fa1275",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "b457c377-7af0-4dce-9882-dbc0fba27911",
+    "scanned_at": "2025-10-09T18:24:23.069975+00:00",
+    "expires_at": "2025-10-09T20:24:23.069975+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "3e0f89da-cf6d-4025-8ae6-3d970e898829",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "1ae6d99f-342b-452f-94da-403391f39743",
+    "scanned_at": "2025-10-09T18:27:33.376757+00:00",
+    "expires_at": "2025-10-09T20:27:33.376757+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "e5419586-ef26-407f-9c20-6b56cce1d650",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "bc0a5388-f00f-48a7-8a18-2fb8c20ee92d",
+    "scanned_at": "2025-10-09T18:31:57.864793+00:00",
+    "expires_at": "2025-10-09T20:31:57.864793+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "06db814a-da43-4b00-8a0c-c6dfc8dfe40c",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "298c893f-6509-4d90-85bb-0ffd3c66d46e",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "ed44754d-9eb8-430f-a28d-de2f0c74425c",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "46fa39af-7b61-424b-a995-de2b5ab63f52",
+    "scanned_at": "2025-10-09T18:57:12.615786+00:00",
+    "expires_at": "2025-10-09T20:57:12.615786+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "223aebd1-0711-456a-aa6d-7d3013010d82",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "5e229134-1390-4015-b6de-a5a3c28355aa",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "1b51c061-1279-4645-8968-baadc0a7114b",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "dc4696d8-d0be-4fbc-95f7-ee9a485c577c",
+    "scanned_at": "2025-10-09T19:05:25.467443+00:00",
+    "expires_at": "2025-10-09T21:05:25.467443+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "06db814a-da43-4b00-8a0c-c6dfc8dfe40c",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "298c893f-6509-4d90-85bb-0ffd3c66d46e",
+      "service_category": "veterinary"
+    }
+  },
+  {
+    "id": "c980ffcc-4ebe-425c-8a4e-5425c0226cc3",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "77068b07-af7f-44af-a751-0d754b6db344",
+    "scanned_at": "2025-10-09T19:10:46.712972+00:00",
+    "expires_at": "2025-10-09T21:10:46.712972+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "e9b8ef80-d000-4657-9b56-b7a7786bd0b4",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "e84f462d-7348-4049-a28d-52084aef187a",
+    "scanned_at": "2025-10-09T19:19:26.362317+00:00",
+    "expires_at": "2025-10-09T21:19:26.362317+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "3b95ef0a-5f95-4c85-a97f-725ddb5d90eb",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "1ba4a719-661b-4729-a5c6-441afd2ae0e4",
+    "scanned_at": "2025-10-09T20:06:46.080065+00:00",
+    "expires_at": "2025-10-09T22:06:46.080065+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "5287f314-ea01-4d25-b00d-7300d82b8372",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "524ea2ee-b319-4f6e-84b9-e34d58ac6bb5",
+    "scanned_at": "2025-10-09T20:17:46.821127+00:00",
+    "expires_at": "2025-10-09T22:17:46.821127+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "a1d21dc1-cd51-41d6-adfc-c744aa656390",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "e849ea0d-ea0d-4502-8ac2-8e3df77f471e",
+    "scanned_at": "2025-10-09T20:20:41.389428+00:00",
+    "expires_at": "2025-10-09T22:20:41.389428+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "3aa7db3a-e96f-45b4-8e4a-e9cd73c89fe1",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "62825323-d0c6-4d46-8b1b-cfe37afd25c3",
+    "scanned_at": "2025-10-09T20:23:35.707174+00:00",
+    "expires_at": "2025-10-09T22:23:35.707174+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "6d7cb1e4-ef2f-409e-9467-559a31ab7ae3",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "Veterinaria Cris",
+      "service_type_id": "8461a4cb-0470-4b10-b413-8cc23e036016",
+      "service_category": "shelter"
+    }
+  },
+  {
+    "id": "ade75f7c-1c8b-4f84-8df5-cb9f7be489a8",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "b36c4d87-343f-4d9f-b5df-5b19d850d6f5",
+    "scanned_at": "2025-10-09T20:36:20.546029+00:00",
+    "expires_at": "2025-10-09T22:36:20.546029+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "23f9aaba-3a21-4c24-9ac1-a499693eef5d",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "5be4ce51-1d0e-47f1-b9d4-edd359e555f0",
+    "scanned_at": "2025-10-09T20:39:45.445204+00:00",
+    "expires_at": "2025-10-09T22:39:45.445204+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "d2d94347-fdf8-4c11-839d-f2d45cee574c",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "6f2f317d-c8e2-4b47-8240-7a515fa0ab71",
+    "scanned_at": "2025-10-09T20:45:17.022086+00:00",
+    "expires_at": "2025-10-09T22:45:17.022086+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "94d73b1f-c35b-4a0d-8d7b-8b9e51e77b6d",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "ed36dce3-ec76-4940-ab85-ee36088a2aa0",
+    "scanned_at": "2025-10-09T20:49:28.188982+00:00",
+    "expires_at": "2025-10-09T22:49:28.188982+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "e48351d0-20b4-467a-9a19-cbd784645043",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "6fc2f244-4fd0-4b6e-af8a-86a2d056077b",
+    "scanned_at": "2025-10-09T20:53:22.506922+00:00",
+    "expires_at": "2025-10-09T22:53:22.506922+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  },
+  {
+    "id": "09b3e506-6030-46ce-be6b-171501bd79af",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "scanned_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "qr_code": "2181b559-c221-4a87-83f2-2dd9dc2abe0d",
+    "scanned_at": "2025-10-09T20:55:21.067379+00:00",
+    "expires_at": "2025-10-09T22:55:21.067379+00:00",
+    "scan_type": "general",
+    "is_active": true,
+    "metadata": {
+      "scanned_as": "provider",
+      "service_id": "a64632a6-40e5-42d6-9a76-711a93dba1d0",
+      "provider_id": "5807a9cd-8dba-4d0b-a1db-357bbb09f0bb",
+      "service_name": "CrisMaster",
+      "service_type_id": "ed5c5d25-629a-44bc-a58a-84490619e314",
+      "service_category": "boarding"
+    }
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ac2cbc6a-65fb-4572-8ab4-6d480dd137d9",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "vaccine_id": "60c1dc8e-c225-421a-85d4-e023fb954d32",
+    "applied_on": "2025-10-09",
+    "next_due_on": "2026-10-09",
+    "applied_by": "d9a31539-c377-467a-99e2-787ef3c96807",
+    "notes": "test1",
+    "created_at": "2025-10-09T18:45:56.835721+00:00",
+    "batch_number": "1234",
+    "veterinarian_name": "Veterinaria Cris",
+    "provider_id": "d9a31539-c377-467a-99e2-787ef3c96807"
+  },
+  {
+    "id": "cab001e8-4934-4ce5-8b8e-2285eba7ec78",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "vaccine_id": "e5b09b1f-3082-4591-b79b-82bfb38fe231",
+    "applied_on": "2025-10-09",
+    "next_due_on": "2026-10-09",
+    "applied_by": "d9a31539-c377-467a-99e2-787ef3c96807",
+    "notes": "test2",
+    "created_at": "2025-10-09T18:53:54.009017+00:00",
+    "batch_number": "222",
+    "veterinarian_name": null,
+    "provider_id": "d9a31539-c377-467a-99e2-787ef3c96807"
+  },
+  {
+    "id": "d47511b1-aaf5-4c77-b387-d446ebbbdbf6",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "vaccine_id": "5f78b9e3-b0c1-4266-9ede-623326fbccd3",
+    "applied_on": "2025-10-09",
+    "next_due_on": "2026-10-09",
+    "applied_by": "d9a31539-c377-467a-99e2-787ef3c96807",
+    "notes": "test3",
+    "created_at": "2025-10-09T18:56:14.243972+00:00",
+    "batch_number": "333",
+    "veterinarian_name": null,
+    "provider_id": null
+  },
+  {
+    "id": "57510d3e-e052-4fb1-9686-34341d73ab80",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "vaccine_id": "50833299-4348-46be-9c4f-b9fb8783a5d1",
+    "applied_on": "2025-10-09",
+    "next_due_on": "2026-10-09",
+    "applied_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "notes": "test4",
+    "created_at": "2025-10-09T18:57:31.689888+00:00",
+    "batch_number": "4444",
+    "veterinarian_name": "Veterinaria Cris",
+    "provider_id": "2548a1e1-6444-4256-a389-6b10719d9d5a"
+  },
+  {
+    "id": "9f10138b-5e70-47b4-b48c-5f8f7fbc6bdb",
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "vaccine_id": "743f6763-404c-400e-887b-f06b933149f5",
+    "applied_on": "2025-10-09",
+    "next_due_on": "2026-10-09",
+    "applied_by": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "notes": "test5",
+    "created_at": "2025-10-09T19:05:46.288188+00:00",
+    "batch_number": "5555",
+    "veterinarian_name": "Veterinaria Cris",
+    "provider_id": "2548a1e1-6444-4256-a389-6b10719d9d5a"
+  }
+]

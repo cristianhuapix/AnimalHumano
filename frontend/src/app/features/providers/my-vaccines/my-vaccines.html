@@ -1,0 +1,386 @@
+<div class="container">
+  <div class="header-row">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1 class="page-title">💉 Mis Registros de Vacunas</h1>
+    </div>
+    @if (petId()) {
+      <div class="header-buttons">
+        <button (click)="showVaccineInfo()" class="btn-info">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          Info Vacunas
+        </button>
+        <button (click)="addVaccine()" class="btn-add">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+          Aplicar Vacuna
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Pending Required Vaccines Alert -->
+  @if (petId() && pendingRequiredVaccines() > 0) {
+    <div class="alert-pending">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-content">
+        <h3>Vacunas Obligatorias Pendientes</h3>
+        <p>Esta mascota tiene <strong>{{ pendingRequiredVaccines() }}</strong> vacuna{{ pendingRequiredVaccines() > 1 ? 's' : '' }} obligatoria{{ pendingRequiredVaccines() > 1 ? 's' : '' }} pendiente{{ pendingRequiredVaccines() > 1 ? 's' : '' }}</p>
+      </div>
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="text-center py-8">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <p class="mt-4 text-gray-600">Cargando registros de vacunas...</p>
+    </div>
+  } @else if (error()) {
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      {{ error() }}
+    </div>
+  } @else {
+    @if (items().length === 0) {
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-8 text-center">
+        <p class="text-xl text-gray-600 mb-4">📋 No hay registros de vacunas registrados</p>
+        <p class="text-gray-500">Los registros de vacunación aparecerán aquí cuando registres vacunas aplicadas.</p>
+      </div>
+    } @else {
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden" style="width: auto;">
+          <table class="divide-y divide-gray-200" style="width: auto;">
+          <thead class="bg-gray-50">
+            <tr>
+              @if (!petId()) {
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mascota</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dueño</th>
+              }
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vacuna</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de Aplicación</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Próxima Dosis</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lote</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Veterinario</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notas</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (item of items(); track item.id) {
+              <tr>
+                @if (!petId()) {
+                  <td class="px-6 py-4 whitespace-nowrap">{{ item.pet_name || '-' }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">{{ item.owner_name || '-' }}</td>
+                }
+                <td class="px-6 py-4 whitespace-nowrap">{{ item.vaccine_name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ item.application_date }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ item.next_dose_date || '-' }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ item.batch_number || '-' }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ item.veterinarian_name || '-' }}</td>
+                <td class="px-6 py-4">{{ item.notes || '-' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      @if (totalPages() > 1) {
+        <div class="mt-6 flex justify-center items-center space-x-2">
+          <button
+            (click)="goToPage(currentPage() - 1)"
+            [disabled]="currentPage() === 1"
+            class="px-4 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+            Anterior
+          </button>
+          <span class="px-4 py-2">
+            Página {{ currentPage() }} de {{ totalPages() }}
+          </span>
+          <button
+            (click)="goToPage(currentPage() + 1)"
+            [disabled]="currentPage() === totalPages()"
+            class="px-4 py-2 border rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+            Siguiente
+          </button>
+        </div>
+      }
+    }
+  }
+
+  <!-- Modal para agregar vacuna -->
+  @if (showModal()) {
+    <div class="modal-overlay" (click)="closeModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>💉 Agregar Vacuna</h2>
+          <button class="btn-close" (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          @if (error()) {
+            <div class="alert alert-error">{{ error() }}</div>
+          }
+
+          <form class="vaccine-form">
+            <div class="form-group">
+              <label for="vaccine_id">Vacuna <span class="required">*</span></label>
+              <select
+                id="vaccine_id"
+                [ngModel]="vaccineForm().vaccine_id"
+                (ngModelChange)="updateFormField('vaccine_id', $event)"
+                name="vaccine_id"
+                required
+              >
+                <option value="">Selecciona una vacuna</option>
+                @for (vaccine of availableVaccines(); track vaccine.id) {
+                  <option [value]="vaccine.id">
+                    {{ vaccine.name }}
+                    @if (vaccine.required) {
+                      (Obligatoria)
+                    } @else {
+                      (Opcional)
+                    }
+                  </option>
+                }
+              </select>
+              @if (vaccineForm().vaccine_id) {
+                <small class="vaccine-info">
+                  {{ getSelectedVaccineDescription() }}
+                </small>
+              }
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="application_date">Fecha de Aplicación <span class="required">*</span></label>
+                <input
+                  type="date"
+                  id="application_date"
+                  [ngModel]="vaccineForm().application_date"
+                  (ngModelChange)="updateFormField('application_date', $event)"
+                  name="application_date"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="next_dose_date">Próxima Dosis</label>
+                <input
+                  type="date"
+                  id="next_dose_date"
+                  [ngModel]="vaccineForm().next_dose_date"
+                  (ngModelChange)="updateFormField('next_dose_date', $event)"
+                  name="next_dose_date"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="batch_number">Número de Lote</label>
+              <input
+                type="text"
+                id="batch_number"
+                [ngModel]="vaccineForm().batch_number"
+                (ngModelChange)="updateFormField('batch_number', $event)"
+                name="batch_number"
+                placeholder="Ej: LOT-2024-001"
+              />
+            </div>
+
+            @if (isProviderAccess() && vaccineForm().veterinarian_name) {
+              <div class="form-group">
+                <label>Veterinario</label>
+                <div class="readonly-field">{{ vaccineForm().veterinarian_name }}</div>
+              </div>
+            }
+
+            <div class="form-group">
+              <label for="notes">Notas Adicionales</label>
+              <textarea
+                id="notes"
+                [ngModel]="vaccineForm().notes"
+                (ngModelChange)="updateFormField('notes', $event)"
+                name="notes"
+                rows="3"
+                placeholder="Observaciones, reacciones, etc."
+              ></textarea>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeModal()" [disabled]="savingVaccine()">
+            Cancelar
+          </button>
+          <button class="btn-save" (click)="saveVaccine()" [disabled]="savingVaccine()">
+            @if (savingVaccine()) {
+              <span class="spinner-small"></span>
+              Aplicando...
+            } @else {
+              Aplicar Vacuna
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Vaccine Info Modal -->
+  @if (showInfoModal()) {
+    <div class="modal-overlay" (click)="closeInfoModal()">
+      <div class="modal-content modal-large" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>Información de Vacunas para {{ pet()?.species?.name || 'esta especie' }}</h2>
+          <button class="btn-close" (click)="closeInfoModal()">×</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="space-y-3">
+            <!-- Required Vaccines -->
+            @if (requiredVaccines().length > 0) {
+              <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <h4 class="font-semibold text-orange-800 mb-2 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                    <path d="M12 9v4"></path>
+                    <path d="M12 17h.01"></path>
+                  </svg>
+                  Vacunas Obligatorias ({{ requiredVaccines().length }})
+                </h4>
+                <div class="space-y-2">
+                  @for (vaccine of requiredVaccines(); track vaccine.id) {
+                    <div class="flex items-center justify-between p-2 bg-transparent rounded border">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-sm text-orange-700">• {{ vaccine.name }}</span>
+                          <span class="text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">Obligatoria</span>
+                        </div>
+                      </div>
+                      <button type="button" class="p-1 text-blue-500 hover:text-blue-700 transition-colors" (click)="toggleVaccineDetail(vaccine.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="M12 16v-4"></path>
+                          <path d="M12 8h.01"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Optional Vaccines -->
+            @if (optionalVaccines().length > 0) {
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 class="font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16v-4"></path>
+                    <path d="M12 8h.01"></path>
+                  </svg>
+                  Vacunas Opcionales (Recomendadas) ({{ optionalVaccines().length }})
+                </h4>
+                <div class="space-y-2">
+                  @for (vaccine of optionalVaccines(); track vaccine.id) {
+                    <div class="flex items-center justify-between p-2 bg-transparent rounded border">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-sm text-blue-700">• {{ vaccine.name }}</span>
+                          <span class="text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800">Opcional</span>
+                        </div>
+                      </div>
+                      <button type="button" class="p-1 text-blue-500 hover:text-blue-700 transition-colors" (click)="toggleVaccineDetail(vaccine.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="M12 16v-4"></path>
+                          <path d="M12 8h.01"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            @if (availableVaccines().length === 0) {
+              <p class="text-center text-gray-500">No hay información de vacunas disponible para esta especie.</p>
+            }
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeInfoModal()">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Vaccine Detail Popup -->
+  @if (selectedVaccineDetail()) {
+    <div class="vaccine-detail-popup" (click)="toggleVaccineDetail(null)">
+      <div class="vaccine-detail-content" (click)="$event.stopPropagation()">
+        <button class="vaccine-popup-close" (click)="toggleVaccineDetail(null)">×</button>
+        @for (vaccine of availableVaccines(); track vaccine.id) {
+          @if (vaccine.id === selectedVaccineDetail()) {
+            <div class="space-y-3">
+              <div>
+                <h4 class="font-semibold text-gray-800 text-sm">{{ vaccine.name }}</h4>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="text-xs px-2 py-1 rounded-full" [class.bg-red-100]="vaccine.required" [class.text-red-800]="vaccine.required" [class.bg-yellow-100]="!vaccine.required" [class.text-yellow-800]="!vaccine.required">
+                    {{ vaccine.required ? 'Obligatoria' : 'Opcional' }}
+                  </span>
+                  @if (vaccine.interval_days) {
+                    <span class="text-xs text-gray-500">Cada {{ vaccine.interval_days / 30 | number:'1.0-0' }} meses</span>
+                  }
+                </div>
+              </div>
+              <div>
+                <h5 class="font-medium text-gray-700 text-xs mb-1">Descripción:</h5>
+                <p class="text-xs text-gray-600">{{ vaccine.description || 'Vacuna contra enfermedad' }}</p>
+              </div>
+              <div>
+                <h5 class="font-medium text-gray-700 text-xs mb-1">¿Por qué es importante?</h5>
+                <p class="text-xs text-gray-600">{{ vaccine.importance || (vaccine.required ? 'Protege contra enfermedad grave y potencialmente mortal. Es obligatoria por ley.' : 'Recomendada para proteger contra enfermedades que pueden afectar la calidad de vida.') }}</p>
+              </div>
+              <div>
+                <h5 class="font-medium text-gray-700 text-xs mb-1">Contagiosidad:</h5>
+                <div class="space-y-1">
+                  @if (vaccine.contagious_to_humans) {
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs text-red-600 font-medium">⚠️ Zoonosis:</span>
+                      <span class="text-xs text-red-600">Puede transmitirse a humanos</span>
+                    </div>
+                  } @else {
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs text-green-600 font-medium">✅ No zoonosis:</span>
+                      <span class="text-xs text-green-600">No se transmite a humanos</span>
+                    </div>
+                  }
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-orange-600 font-medium">🐾 Contagiosa:</span>
+                    <span class="text-xs text-orange-600">Se transmite entre animales</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  }
+</div>

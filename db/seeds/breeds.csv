@@ -1,0 +1,71 @@
+species_name,name,code
+Perro,Labrador Retriever,LA
+Perro,Golden Retriever,GO
+Perro,Pastor Alemán,PA
+Perro,Bulldog Francés,BF
+Perro,Bulldog Inglés,BI
+Perro,Beagle,BE
+Perro,Poodle,PO
+Perro,Yorkshire Terrier,YO
+Perro,Boxer,BO
+Perro,Dachshund,DA
+Perro,Chihuahua,CH
+Perro,Pomerania,PM
+Perro,Husky Siberiano,HU
+Perro,Border Collie,BC
+Perro,Jack Russell Terrier,JR
+Perro,Cocker Spaniel,CS
+Perro,Rottweiler,RO
+Perro,Doberman,DO
+Perro,Shih Tzu,SH
+Perro,Schnauzer,SC
+Perro,Mestizo,ME
+Gato,Persa,PE
+Gato,Siamés,SI
+Gato,Maine Coon,MC
+Gato,Británico de Pelo Corto,BR
+Gato,Ragdoll,RA
+Gato,Bengalí,BE
+Gato,Sphynx,SP
+Gato,Abisinio,AB
+Gato,Birmano,BI
+Gato,Angora Turco,AN
+Gato,Scottish Fold,SF
+Gato,Azul Ruso,AZ
+Gato,Mestizo,ME
+Ave,Canario,CA
+Ave,Periquito,PE
+Ave,Loro,LO
+Ave,Cacatúa,CC
+Ave,Agapornis,AG
+Ave,Ninfa,NI
+Ave,Diamante Mandarín,DM
+Conejo,Belier,BE
+Conejo,Gigante de Flandes,GF
+Conejo,Enano Holandés,EH
+Conejo,Rex,RE
+Conejo,Angora,AN
+Conejo,Cabeza de León,CL
+Reptil,Iguana Verde,IG
+Reptil,Gecko Leopardo,GE
+Reptil,Camaleón,CA
+Reptil,Tortuga de Orejas Rojas,TO
+Reptil,Pitón Bola,PI
+Pez,Goldfish,GO
+Pez,Betta,BE
+Pez,Guppy,GU
+Pez,Tetra Neón,TE
+Pez,Pez Ángel,PA
+Pez,Molly,MO
+Caballo,Pura Sangre,PS
+Caballo,Árabe,AR
+Caballo,Cuarto de Milla,CM
+Caballo,Andaluz,AN
+Caballo,Criollo,CR
+Hámster,Sirio,SI
+Hámster,Ruso,RU
+Hámster,Roborovski,RO
+Cobayo,Americano,AM
+Cobayo,Peruano,PE
+Cobayo,Abisinio,AB
+Hurón,Hurón Doméstico,HD

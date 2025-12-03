@@ -1,0 +1,404 @@
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  // Reducir padding en móviles
+  @media (max-width: 768px) {
+    padding: 0.75rem 1rem;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 1rem;
+
+    .logo {
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+
+      .logo-img {
+        height: 60px;
+        width: auto;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        // Logo más pequeño en móviles
+        @media (max-width: 768px) {
+          height: 45px;
+        }
+      }
+    }
+
+    .hero-text {
+      flex: 1;
+      margin-left: 2rem;
+      color: white;
+
+      h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      // Ocultar si el h1 se quebraría (texto ~26 chars a 1.5rem)
+      @media (max-width: 950px) {
+        h1 {
+          display: none;
+        }
+      }
+
+      // Ocultar si el p se quebraría (texto ~58 chars a 0.9rem)
+      @media (max-width: 1100px) {
+        p {
+          display: none;
+        }
+      }
+
+      // Si ambos desaparecen, ocultar el contenedor completo
+      @media (max-width: 950px) {
+        display: none;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+
+      // Home button para mobile - solo visible en mobile
+      .mobile-home-btn {
+        display: none;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+        text-decoration: none;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        svg {
+          display: block;
+          color: white;
+          stroke: white;
+        }
+
+        @media (max-width: 768px) {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      // Botón hamburguesa - solo visible en mobile
+      .hamburger-btn {
+        display: none;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        svg {
+          display: block;
+        }
+
+        @media (max-width: 768px) {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .nav-item {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover, &.active {
+          color: #3498db;
+        }
+      }
+
+      .mode-switcher {
+        display: flex;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        padding: 3px;
+
+        .mode-btn {
+          background: transparent;
+          border: none;
+          padding: 0.4rem 0.8rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1.2rem;
+          border-radius: 4px;
+          opacity: 0.6;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          &.active {
+            background: white;
+            opacity: 1;
+          }
+        }
+      }
+
+      .home-btn {
+        margin-right: auto;
+
+        svg {
+          color: white;
+          stroke: white;
+        }
+      }
+
+      .user-menu.desktop-menu {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-left: auto;
+
+        // Ocultar menú desktop en mobile
+        @media (max-width: 768px) {
+          display: none;
+        }
+
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.4rem 0.8rem;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 6px;
+
+          .user-icon {
+            color: white;
+          }
+
+          .user-name {
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+
+            // Ocultar nombre de usuario en móviles
+            @media (max-width: 768px) {
+              display: none;
+            }
+          }
+        }
+
+        .icon-btn {
+          position: relative;
+          background: transparent;
+          border: none;
+          color: white;
+          cursor: pointer;
+          padding: 0.5rem;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+
+          svg {
+            color: white;
+            stroke: currentColor;
+          }
+
+          .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #e74c3c;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            min-width: 16px;
+            text-align: center;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.15);
+          }
+
+          &.logout {
+            &:hover {
+              background: rgba(231, 76, 60, 0.3);
+            }
+
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+              pointer-events: none;
+            }
+          }
+
+          .spinner {
+            animation: spin 1s linear infinite;
+          }
+
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Menú móvil desplegable
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    padding-top: 60px; // Altura del header
+    display: flex;
+    justify-content: flex-end;
+
+    .mobile-menu {
+      background: white;
+      width: 280px;
+      max-width: 85vw;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      transform-origin: top;
+      animation: slideDown 0.3s ease-out;
+      align-self: flex-start;
+
+      .mobile-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        border: none;
+        background: white;
+        color: #2c3e50;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        border-bottom: 1px solid #e0e0e0;
+        width: 100%;
+        text-align: left;
+
+        svg {
+          color: #2c3e50;
+          stroke: currentColor;
+          flex-shrink: 0;
+        }
+
+        span {
+          flex: 1;
+        }
+
+        &:hover {
+          background: #f5f6fa;
+        }
+
+        &.logout-item {
+          color: #e74c3c;
+          border-bottom: none;
+
+          svg {
+            color: #e74c3c;
+          }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+
+        .spinner {
+          animation: spin 1s linear infinite;
+        }
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+      to {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+main {
+  min-height: calc(100vh - 180px);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+footer {
+  background: #34495e;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+
+  p {
+    margin: 0;
+  }
+}

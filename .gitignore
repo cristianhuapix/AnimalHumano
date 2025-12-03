@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment files (IMPORTANT: contains secrets)
+.env
+backend/.env
+
+# Angular build/cache
+frontend/.angular/
+frontend/dist/
+frontend/.angularcache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Temporary files
+*.tmp
+*.temp
+nul

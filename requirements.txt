@@ -1,0 +1,20 @@
+# Supabase Python Client
+supabase==2.10.0
+
+# Web Framework
+flask==3.0.3
+flask-cors==4.0.0
+
+# Google Maps (opcional)
+googlemaps==4.10.0
+
+# Firebase Cloud Messaging (opcional)
+firebase-admin==6.5.0
+
+# Utilities
+python-dotenv==1.0.1
+requests==2.32.3
+
+# Testing
+pytest==8.3.3
+pytest-flask==1.3.0

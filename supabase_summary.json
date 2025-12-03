@@ -1,0 +1,78 @@
+{
+  "profiles": {
+    "count": 2,
+    "has_data": true
+  },
+  "species": {
+    "count": 10,
+    "has_data": true
+  },
+  "breeds": {
+    "count": 70,
+    "has_data": true
+  },
+  "pets": {
+    "count": 12,
+    "has_data": true
+  },
+  "providers": {
+    "count": 1,
+    "has_data": true
+  },
+  "provider_features": {
+    "count": 12,
+    "has_data": true
+  },
+  "provider_available_features": {
+    "count": 15,
+    "has_data": true
+  },
+  "provider_services": {
+    "count": 13,
+    "has_data": true
+  },
+  "appointments": {
+    "count": 0,
+    "has_data": false
+  },
+  "medical_records": {
+    "count": 0,
+    "has_data": false
+  },
+  "vaccines": {
+    "count": 20,
+    "has_data": true
+  },
+  "walks": {
+    "count": 0,
+    "has_data": false
+  },
+  "lost_pet_reports": {
+    "count": 4,
+    "has_data": true
+  },
+  "conversations": {
+    "count": 0,
+    "has_data": false
+  },
+  "messages": {
+    "count": 0,
+    "has_data": false
+  },
+  "notifications": {
+    "count": 0,
+    "has_data": false
+  },
+  "device_tokens": {
+    "count": 0,
+    "has_data": false
+  },
+  "qr_scans": {
+    "count": 28,
+    "has_data": true
+  },
+  "pet_boardings": {
+    "count": 0,
+    "has_data": false
+  }
+}

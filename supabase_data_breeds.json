@@ -1,0 +1,492 @@
+[
+  {
+    "id": "46ccc631-deea-4e15-846b-9458c5e365d5",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Labrador Retriever",
+    "code": "LA",
+    "created_at": "2025-10-04T17:33:12.910513+00:00"
+  },
+  {
+    "id": "4716011f-f337-4a1f-a39a-44751fb206ff",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Golden Retriever",
+    "code": "GO",
+    "created_at": "2025-10-04T17:33:13.097353+00:00"
+  },
+  {
+    "id": "b539b09d-8a0f-473f-832b-b4cca70c0cbc",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Pastor Alemán",
+    "code": "PA",
+    "created_at": "2025-10-04T17:33:13.285038+00:00"
+  },
+  {
+    "id": "a16f3fb8-895a-4b12-af95-3a52855e75c2",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Bulldog Francés",
+    "code": "BF",
+    "created_at": "2025-10-04T17:33:13.496429+00:00"
+  },
+  {
+    "id": "56d97f94-f2a6-4800-82cd-8441831f21ba",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Bulldog Inglés",
+    "code": "BI",
+    "created_at": "2025-10-04T17:33:13.687874+00:00"
+  },
+  {
+    "id": "9c68b6bf-1313-4ea5-a6bd-73f181a5a2ec",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Beagle",
+    "code": "BE",
+    "created_at": "2025-10-04T17:33:13.884065+00:00"
+  },
+  {
+    "id": "21b23b3e-bada-4385-935b-4436e2b1bf0c",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Poodle",
+    "code": "PO",
+    "created_at": "2025-10-04T17:33:14.065915+00:00"
+  },
+  {
+    "id": "39a05eae-b3ce-42b2-b437-7eca5bcb1ca6",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Yorkshire Terrier",
+    "code": "YO",
+    "created_at": "2025-10-04T17:33:14.247961+00:00"
+  },
+  {
+    "id": "4ee86e03-a497-4f9a-930d-a599dddcf583",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Boxer",
+    "code": "BO",
+    "created_at": "2025-10-04T17:33:14.438468+00:00"
+  },
+  {
+    "id": "f1013fef-b3b5-4cb7-b42f-c83f3a00a2c5",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Dachshund",
+    "code": "DA",
+    "created_at": "2025-10-04T17:33:14.641254+00:00"
+  },
+  {
+    "id": "be34fd48-3b6b-46f3-9bb5-01288abf08c3",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Chihuahua",
+    "code": "CH",
+    "created_at": "2025-10-04T17:33:14.851604+00:00"
+  },
+  {
+    "id": "97a36a3d-1772-4bd1-b048-57855b54cf73",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Pomerania",
+    "code": "PM",
+    "created_at": "2025-10-04T17:33:15.041709+00:00"
+  },
+  {
+    "id": "66fb1cf7-6de0-4287-9902-6966304fde95",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Husky Siberiano",
+    "code": "HU",
+    "created_at": "2025-10-04T17:33:15.26366+00:00"
+  },
+  {
+    "id": "cfb91103-61a2-4260-b9fa-16b6ff98106c",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Border Collie",
+    "code": "BC",
+    "created_at": "2025-10-04T17:33:15.458087+00:00"
+  },
+  {
+    "id": "ce576920-1764-4c93-a759-33ab2c9f4682",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Jack Russell Terrier",
+    "code": "JR",
+    "created_at": "2025-10-04T17:33:15.64528+00:00"
+  },
+  {
+    "id": "1e913422-4846-49a7-a4db-3aa768a3de9b",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Cocker Spaniel",
+    "code": "CS",
+    "created_at": "2025-10-04T17:33:15.834443+00:00"
+  },
+  {
+    "id": "03789d70-495f-44f3-96cc-e48e1398224c",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Rottweiler",
+    "code": "RO",
+    "created_at": "2025-10-04T17:33:16.025727+00:00"
+  },
+  {
+    "id": "b0faefbd-3399-4031-a87b-6927baf36c44",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Doberman",
+    "code": "DO",
+    "created_at": "2025-10-04T17:33:16.22289+00:00"
+  },
+  {
+    "id": "d354a05f-a0f5-4297-9c5f-b2c99a7b0d63",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Shih Tzu",
+    "code": "SH",
+    "created_at": "2025-10-04T17:33:16.433271+00:00"
+  },
+  {
+    "id": "47dd7cb3-71e9-4899-821f-be91b066602c",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Schnauzer",
+    "code": "SC",
+    "created_at": "2025-10-04T17:33:16.621553+00:00"
+  },
+  {
+    "id": "b9309d53-66df-4312-93fd-06c557a9863b",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "name": "Mestizo",
+    "code": "ME",
+    "created_at": "2025-10-04T17:33:16.83031+00:00"
+  },
+  {
+    "id": "4d5b524e-0d9c-47ae-9772-9981d925b308",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Persa",
+    "code": "PE",
+    "created_at": "2025-10-04T17:33:17.019872+00:00"
+  },
+  {
+    "id": "5f8b47ef-2da1-4192-8958-86d061261c4f",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Siamés",
+    "code": "SI",
+    "created_at": "2025-10-04T17:33:17.222319+00:00"
+  },
+  {
+    "id": "fd29a074-7169-4297-808c-41c6e24d307c",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Maine Coon",
+    "code": "MC",
+    "created_at": "2025-10-04T17:33:17.432674+00:00"
+  },
+  {
+    "id": "607fccc3-c6b1-4a51-b3ba-55680a67175b",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Británico de Pelo Corto",
+    "code": "BR",
+    "created_at": "2025-10-04T17:33:17.613174+00:00"
+  },
+  {
+    "id": "34c02449-7b7c-47af-8ac3-94e44d8a1dfc",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Ragdoll",
+    "code": "RA",
+    "created_at": "2025-10-04T17:33:17.801554+00:00"
+  },
+  {
+    "id": "6ad81522-7a39-48c1-b855-58895e7d1844",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Bengalí",
+    "code": "BE",
+    "created_at": "2025-10-04T17:33:17.994714+00:00"
+  },
+  {
+    "id": "e981aabb-9477-4265-bf2e-4500ebb641d6",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Sphynx",
+    "code": "SP",
+    "created_at": "2025-10-04T17:33:18.19052+00:00"
+  },
+  {
+    "id": "292d2366-08dc-4092-ac2c-f721b2fe1326",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Abisinio",
+    "code": "AB",
+    "created_at": "2025-10-04T17:33:18.382717+00:00"
+  },
+  {
+    "id": "6271096d-2e65-4397-937d-a5ab80646452",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Birmano",
+    "code": "BI",
+    "created_at": "2025-10-04T17:33:18.573242+00:00"
+  },
+  {
+    "id": "a58fe6b0-b4b8-4a06-8dc0-d79b3c504a92",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Angora Turco",
+    "code": "AN",
+    "created_at": "2025-10-04T17:33:18.790595+00:00"
+  },
+  {
+    "id": "4d37146b-928d-43f5-9dd2-5accd62cdbe4",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Scottish Fold",
+    "code": "SF",
+    "created_at": "2025-10-04T17:33:19.007554+00:00"
+  },
+  {
+    "id": "d53304eb-e549-48f8-a0fa-c72b1ee5f6b9",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Azul Ruso",
+    "code": "AZ",
+    "created_at": "2025-10-04T17:33:19.19056+00:00"
+  },
+  {
+    "id": "47b93794-9acd-4303-bdbe-a3bc11533e3c",
+    "species_id": "9e1f4012-5dac-4df2-93a2-998e314ff948",
+    "name": "Mestizo",
+    "code": "ME",
+    "created_at": "2025-10-04T17:33:19.373507+00:00"
+  },
+  {
+    "id": "07417778-7944-4d10-a3cf-7f66076dd093",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Canario",
+    "code": "CA",
+    "created_at": "2025-10-04T17:33:19.561102+00:00"
+  },
+  {
+    "id": "466d5e25-ed3e-4445-bb61-e5d94175eacf",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Periquito",
+    "code": "PE",
+    "created_at": "2025-10-04T17:33:19.811034+00:00"
+  },
+  {
+    "id": "82e9ae2e-9bbe-46b9-9caa-4d239a506952",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Loro",
+    "code": "LO",
+    "created_at": "2025-10-04T17:33:20.012979+00:00"
+  },
+  {
+    "id": "ecf3da4b-490a-444e-8605-6bb39f96652e",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Cacatúa",
+    "code": "CC",
+    "created_at": "2025-10-04T17:33:20.241796+00:00"
+  },
+  {
+    "id": "177cd8eb-5b1e-4fb1-99ed-ca6e28e26fd8",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Agapornis",
+    "code": "AG",
+    "created_at": "2025-10-04T17:33:20.436633+00:00"
+  },
+  {
+    "id": "9c7fe978-666a-49aa-a91f-5e603c2a72e4",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Ninfa",
+    "code": "NI",
+    "created_at": "2025-10-04T17:33:20.642944+00:00"
+  },
+  {
+    "id": "1448c269-a187-4b89-b436-dc1964cc0641",
+    "species_id": "ba68b8cd-951a-4b75-9b25-42ae00fbf48c",
+    "name": "Diamante Mandarín",
+    "code": "DM",
+    "created_at": "2025-10-04T17:33:20.835306+00:00"
+  },
+  {
+    "id": "919c20e2-b787-4111-831e-1269570ca861",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Belier",
+    "code": "BE",
+    "created_at": "2025-10-04T17:33:21.041495+00:00"
+  },
+  {
+    "id": "927eb8af-09e3-4777-91d1-f539b07fe848",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Gigante de Flandes",
+    "code": "GF",
+    "created_at": "2025-10-04T17:33:21.232378+00:00"
+  },
+  {
+    "id": "4bfe1463-1870-47ab-8979-e05498e74b8b",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Enano Holandés",
+    "code": "EH",
+    "created_at": "2025-10-04T17:33:21.414517+00:00"
+  },
+  {
+    "id": "16234a94-d922-4884-a782-222693923c81",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Rex",
+    "code": "RE",
+    "created_at": "2025-10-04T17:33:21.597963+00:00"
+  },
+  {
+    "id": "b1a5e474-726a-4a8f-b1a6-f8f05eeb328c",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Angora",
+    "code": "AN",
+    "created_at": "2025-10-04T17:33:21.803352+00:00"
+  },
+  {
+    "id": "f7d3d7b1-fb30-4a1c-9bf0-ea2e22292d98",
+    "species_id": "92d5d032-4672-4449-b9ab-7ddb233fa78c",
+    "name": "Cabeza de León",
+    "code": "CL",
+    "created_at": "2025-10-04T17:33:21.985214+00:00"
+  },
+  {
+    "id": "7d807c61-dde9-49df-9d24-40a61a5e0ce3",
+    "species_id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Iguana Verde",
+    "code": "IG",
+    "created_at": "2025-10-04T17:33:22.174288+00:00"
+  },
+  {
+    "id": "999dd40a-a050-4a3c-98e1-bcabe96a6d1a",
+    "species_id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Gecko Leopardo",
+    "code": "GE",
+    "created_at": "2025-10-04T17:33:22.361297+00:00"
+  },
+  {
+    "id": "05ad6542-2707-4952-b063-3e6f08e3b649",
+    "species_id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Camaleón",
+    "code": "CA",
+    "created_at": "2025-10-04T17:33:22.550869+00:00"
+  },
+  {
+    "id": "e67cc6ee-231d-4baf-97a6-b4f3465a21bc",
+    "species_id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Tortuga de Orejas Rojas",
+    "code": "TO",
+    "created_at": "2025-10-04T17:33:22.739083+00:00"
+  },
+  {
+    "id": "72ac54da-8db6-42ab-a3fd-79bf4cc2b837",
+    "species_id": "81011abb-09bb-467b-a6d6-3f17e209e3c6",
+    "name": "Pitón Bola",
+    "code": "PI",
+    "created_at": "2025-10-04T17:33:22.923862+00:00"
+  },
+  {
+    "id": "d9799e16-2a93-4560-a482-8800d4b182aa",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Goldfish",
+    "code": "GO",
+    "created_at": "2025-10-04T17:33:23.128962+00:00"
+  },
+  {
+    "id": "7bc4e4bc-fb4b-4ad4-a0b0-1f8517ddb301",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Betta",
+    "code": "BE",
+    "created_at": "2025-10-04T17:33:23.321819+00:00"
+  },
+  {
+    "id": "bc9a1c36-5bca-4b67-be3e-622bc4d37557",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Guppy",
+    "code": "GU",
+    "created_at": "2025-10-04T17:33:23.514005+00:00"
+  },
+  {
+    "id": "f33dba9c-dbc2-443d-b782-b5c8cd47ea7b",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Tetra Neón",
+    "code": "TE",
+    "created_at": "2025-10-04T17:33:23.695444+00:00"
+  },
+  {
+    "id": "35046c1e-7099-4292-848a-a40f79b916c5",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Pez Ángel",
+    "code": "PA",
+    "created_at": "2025-10-04T17:33:23.881979+00:00"
+  },
+  {
+    "id": "a9e9372f-5d58-4841-9f9e-984e2d726216",
+    "species_id": "e5486daa-8883-497c-8c52-385c56e2b16b",
+    "name": "Molly",
+    "code": "MO",
+    "created_at": "2025-10-04T17:33:24.066467+00:00"
+  },
+  {
+    "id": "f15a72cf-a5c3-458f-b99c-8208cc61df3e",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Pura Sangre",
+    "code": "PS",
+    "created_at": "2025-10-04T17:33:24.259027+00:00"
+  },
+  {
+    "id": "26c91ed0-a292-4057-8351-7061f429de8c",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Árabe",
+    "code": "AR",
+    "created_at": "2025-10-04T17:33:24.439788+00:00"
+  },
+  {
+    "id": "bcf8e4b0-716a-4892-a94a-7ada078e3f3d",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Cuarto de Milla",
+    "code": "CM",
+    "created_at": "2025-10-04T17:33:24.632145+00:00"
+  },
+  {
+    "id": "4a7a5f06-ed50-42a3-9651-a0c4682a8227",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Andaluz",
+    "code": "AN",
+    "created_at": "2025-10-04T17:33:24.82393+00:00"
+  },
+  {
+    "id": "551e8a2a-7630-4b12-8092-667dedb29cfd",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "name": "Criollo",
+    "code": "CR",
+    "created_at": "2025-10-04T17:33:25.017569+00:00"
+  },
+  {
+    "id": "a5f09dfa-1703-49e3-b02a-a74657e06fd1",
+    "species_id": "7e1dbe7f-6281-4c90-bc2d-6b4dc52d1a50",
+    "name": "Sirio",
+    "code": "SI",
+    "created_at": "2025-10-04T17:33:25.218043+00:00"
+  },
+  {
+    "id": "c022684c-a778-4e25-a46d-1cae2f5302d5",
+    "species_id": "7e1dbe7f-6281-4c90-bc2d-6b4dc52d1a50",
+    "name": "Ruso",
+    "code": "RU",
+    "created_at": "2025-10-04T17:33:25.408893+00:00"
+  },
+  {
+    "id": "706e9229-3042-4937-aeaf-caef8e6dfc06",
+    "species_id": "7e1dbe7f-6281-4c90-bc2d-6b4dc52d1a50",
+    "name": "Roborovski",
+    "code": "RO",
+    "created_at": "2025-10-04T17:33:25.600164+00:00"
+  },
+  {
+    "id": "7b1a4b70-f086-4f36-bfac-220b9070c3b0",
+    "species_id": "39c51039-0f5b-4143-9009-1503d6d3221d",
+    "name": "Americano",
+    "code": "AM",
+    "created_at": "2025-10-04T17:33:25.791235+00:00"
+  },
+  {
+    "id": "eca6ba0c-39d6-4410-b0a4-814e86666881",
+    "species_id": "39c51039-0f5b-4143-9009-1503d6d3221d",
+    "name": "Peruano",
+    "code": "PE",
+    "created_at": "2025-10-04T17:33:25.985145+00:00"
+  },
+  {
+    "id": "2bb557fa-e1d7-4fde-8f7e-dc61e2c31efc",
+    "species_id": "39c51039-0f5b-4143-9009-1503d6d3221d",
+    "name": "Abisinio",
+    "code": "AB",
+    "created_at": "2025-10-04T17:33:26.432981+00:00"
+  },
+  {
+    "id": "d24a6ba9-7302-40f2-96a1-8f8e833c58ea",
+    "species_id": "67caf1c7-c770-4933-8eb1-f1a08e0f15ed",
+    "name": "Hurón Doméstico",
+    "code": "HD",
+    "created_at": "2025-10-04T17:33:26.621274+00:00"
+  }
+]

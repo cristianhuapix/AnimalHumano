@@ -1,0 +1,195 @@
+<div class="lost-pets-container container">
+  <div class="header">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1>Mascotas Perdidas</h1>
+    </div>
+    <button (click)="createReport()" class="btn-primary">
+      + Reportar Mascota
+    </button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-bar">
+    <div class="filter-group">
+      <label for="radius">Radio de búsqueda:</label>
+      <select id="radius" [(ngModel)]="radiusKm" (ngModelChange)="onRadiusChange()" class="form-control">
+        @for (radius of availableRadii; track radius) {
+          <option [value]="radius">{{ radius }} km</option>
+        }
+      </select>
+    </div>
+
+    @if (totalCount() > 0) {
+      <div class="results-count">
+        <span>{{ totalCount() }} {{ totalCount() === 1 ? 'mascota encontrada' : 'mascotas encontradas' }}</span>
+      </div>
+    }
+  </div>
+
+  @if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="spinner"></div>
+  }
+
+  @else if (reports().length === 0 && !errorMessage()) {
+    <div class="empty-state">
+      <h2>No hay mascotas perdidas en tu zona</h2>
+      <p>No se encontraron reportes de mascotas perdidas en un radio de {{ radiusKm() }}km.</p>
+      <button (click)="createReport()" class="btn-primary">Reportar Mascota</button>
+    </div>
+  }
+
+  @else {
+    <div class="reports-grid">
+      @for (report of reports(); track report.id) {
+        <div class="report-card" (click)="navigateToReport(report.id)">
+          <!-- Pet Image -->
+          <div class="report-image">
+            @if (report.pet?.photo_url) {
+              <img [src]="report.pet?.photo_url" [alt]="report.pet?.name || 'Mascota'">
+            } @else if (report.images && report.images.length > 0) {
+              <img [src]="report.images[0]" alt="Mascota encontrada">
+            } @else {
+              <div class="placeholder-image">
+                @if (report.pet) {
+                  {{ report.pet.name.charAt(0).toUpperCase() }}
+                } @else {
+                  🐾
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Report Info -->
+          <div class="report-info">
+            <h3>
+              @if (report.pet) {
+                {{ report.pet.name }}
+              } @else {
+                {{ report.species?.name || 'Mascota' }}
+              }
+            </h3>
+
+            <div class="report-details">
+              <span class="detail">
+                <strong>Especie:</strong>
+                @if (report.pet) {
+                  {{ report.pet.species?.name || 'N/A' }}
+                } @else {
+                  {{ report.species?.name || 'N/A' }}
+                }
+              </span>
+
+              @if (report.pet?.breed || report.breed) {
+                <span class="detail">
+                  <strong>Raza:</strong> {{ report.pet?.breed?.name || report.breed?.name }}
+                </span>
+              }
+
+              @if (getDistance(report)) {
+                <span class="detail location">
+                  📍 {{ getDistance(report) }}
+                </span>
+              }
+
+              <span class="detail time">
+                🕐 {{ getTimeAgo(report.created_at) }}
+              </span>
+            </div>
+
+            <p class="description">{{ report.description }}</p>
+
+            @if (report.contact_phone) {
+              <div class="contact-info">
+                📞 {{ report.contact_phone }}
+              </div>
+            }
+
+            <!-- Found Button -->
+            @if (canMarkAsFound(report)) {
+              <button
+                class="btn-found"
+                (click)="openConfirmModal(report.id, $event)"
+                title="Marcar como encontrada">
+                ✓ Marcar como Encontrada
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1) {
+      <div class="pagination">
+        <button
+          class="btn-page"
+          [disabled]="currentPage() === 1"
+          (click)="goToPage(currentPage() - 1)">
+          ‹ Anterior
+        </button>
+
+        @for (page of getPaginationPages(); track page) {
+          @if (page === -1) {
+            <span class="ellipsis">...</span>
+          } @else {
+            <button
+              class="btn-page"
+              [class.active]="page === currentPage()"
+              (click)="goToPage(page)">
+              {{ page }}
+            </button>
+          }
+        }
+
+        <button
+          class="btn-page"
+          [disabled]="currentPage() === totalPages()"
+          (click)="goToPage(currentPage() + 1)">
+          Siguiente ›
+        </button>
+      </div>
+    }
+  }
+
+  <!-- Confirmation Modal -->
+  @if (showConfirmModal()) {
+    <div class="modal-overlay" (click)="closeConfirmModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2>¿Confirmar que la mascota fue encontrada?</h2>
+        <p>Esta acción marcará el reporte como resuelto y será removido de la lista de mascotas perdidas.</p>
+
+        @if (errorMessage()) {
+          <div class="error-message">
+            {{ errorMessage() }}
+          </div>
+        }
+
+        <div class="modal-actions">
+          <button
+            class="btn-cancel"
+            (click)="closeConfirmModal()"
+            [disabled]="isMarkingFound()">
+            Cancelar
+          </button>
+          <button
+            class="btn-confirm"
+            (click)="confirmMarkAsFound()"
+            [disabled]="isMarkingFound()">
+            {{ isMarkingFound() ? 'Marcando...' : 'Sí, Confirmar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

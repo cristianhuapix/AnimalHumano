@@ -1,0 +1,131 @@
+<div class="home-container">
+  @if (!authService.isAuthenticated()) {
+    <section class="hero">
+      <h1>Bienvenido a Animal Humano</h1>
+      <p>Tu plataforma integral para el cuidado y gestión de mascotas</p>
+    </section>
+  }
+
+  @if (!authService.isAuthenticated()) {
+    <!-- Home para usuarios NO autenticados -->
+    <section class="features">
+      <div class="feature-card card-blue">
+        <div class="icon">🐾</div>
+        <div class="content">
+          <h3>Gestión de Mascotas</h3>
+          <p>Administra la información de tus mascotas, vacunas y registros médicos</p>
+        </div>
+      </div>
+
+      <div class="feature-card card-green">
+        <div class="icon">🏥</div>
+        <div class="content">
+          <h3>Proveedores de Servicios</h3>
+          <p>Encuentra veterinarios, peluquerías y paseadores cerca de ti</p>
+        </div>
+      </div>
+
+      <div class="feature-card card-yellow">
+        <div class="icon icon-image">
+          <img src="/lupamascota.png" alt="Mascotas Perdidas">
+        </div>
+        <div class="content">
+          <h3>Mascotas Perdidas</h3>
+          <p>Reporta o ayuda a encontrar mascotas perdidas en tu zona</p>
+        </div>
+      </div>
+
+      <div class="feature-card card-pink">
+        <div class="icon">❤️</div>
+        <div class="content">
+          <h3>Cruces</h3>
+          <p>Encuentra parejas compatibles para la cría de tus mascotas</p>
+        </div>
+      </div>
+    </section>
+  } @else if (modeService.isUserMode()) {
+    <!-- Home para USUARIOS (dueños) -->
+    <section class="features">
+      <a routerLink="/pets" class="feature-card card-blue">
+        <div class="icon">🐕</div>
+        <div class="content">
+          <h3>Mis Mascotas</h3>
+          <p>Gestiona el perfil de tus mascotas</p>
+        </div>
+      </a>
+
+      <a routerLink="/lost-pets" class="feature-card card-yellow">
+        <div class="icon icon-image">
+          <img src="/lupamascota.png" alt="Mascotas Perdidas">
+        </div>
+        <div class="content">
+          <h3>Mascotas Perdidas</h3>
+          <p>Reporta y busca mascotas perdidas</p>
+        </div>
+      </a>
+
+      <a routerLink="/search-services" class="feature-card card-orange">
+        <div class="icon">🔍</div>
+        <div class="content">
+          <h3>Buscar Servicios</h3>
+          <p>Encuentra veterinarios, peluquerías y más cerca de ti</p>
+        </div>
+      </a>
+
+      <a routerLink="/conversations" class="feature-card card-pink">
+        <div class="icon">💬</div>
+        <div class="content">
+          <h3>Mis Chats</h3>
+          <p>Ver mis conversaciones</p>
+        </div>
+      </a>
+
+      <a routerLink="/calendar" class="feature-card card-purple">
+        <div class="icon">📅</div>
+        <div class="content">
+          <h3>Calendario</h3>
+          <p>Gestiona citas y tratamientos</p>
+        </div>
+      </a>
+
+      <a routerLink="/walks" class="feature-card card-green">
+        <div class="icon">🐕‍🦺</div>
+        <div class="content">
+          <h3>Paseos de Mascotas</h3>
+          <p>Historial de paseos</p>
+        </div>
+      </a>
+
+      <a routerLink="/breeding" class="feature-card card-red">
+        <div class="icon">❤️</div>
+        <div class="content">
+          <h3>Cruces</h3>
+          <p>Encuentra parejas compatibles</p>
+        </div>
+      </a>
+    </section>
+  } @else {
+    <!-- Home para PROVEEDORES -->
+    @if (loadingFeatures()) {
+      <section class="features">
+        <div class="loading-message">Cargando funciones...</div>
+      </section>
+    } @else {
+      <section class="features">
+        @for (feature of providerFeatures(); track feature.id) {
+          <a
+            [routerLink]="feature.enabled ? feature.route : null"
+            [class]="getFeatureCardClass(feature)"
+            [class.disabled]="!feature.enabled"
+            [attr.aria-disabled]="!feature.enabled">
+            <div class="icon">{{ feature.icon }}</div>
+            <div class="content">
+              <h3>{{ feature.name }}</h3>
+              <p>{{ feature.description }}</p>
+            </div>
+          </a>
+        }
+      </section>
+    }
+  }
+</div>

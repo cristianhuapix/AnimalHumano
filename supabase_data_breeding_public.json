@@ -1,0 +1,34 @@
+[
+  {
+    "pet_id": "6367c06c-a0eb-4935-bfaa-d6a1527634cf",
+    "name": "Morita",
+    "photo_url": "https://nbuqowkkvmzzvgdxrzkm.supabase.co/storage/v1/object/public/pet-photos/pets/6367c06c-a0eb-4935-bfaa-d6a1527634cf-ed38c839-a703-49f6-a672-26a8ab850456.webp?",
+    "species_id": "bc7811f2-ae48-4cdd-aec7-66be1ad4f65b",
+    "species_name": "Perro",
+    "breed_id": "ce576920-1764-4c93-a759-33ab2c9f4682",
+    "breed_name": "Jack Russell Terrier",
+    "has_pedigree": true,
+    "sex": "F",
+    "dnia": "ARPERJR0000001",
+    "age_years": 13,
+    "owner_id": "2548a1e1-6444-4256-a389-6b10719d9d5a",
+    "city": "Victoria",
+    "country": "AR"
+  },
+  {
+    "pet_id": "9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d",
+    "name": "Mili",
+    "photo_url": "https://nbuqowkkvmzzvgdxrzkm.supabase.co/storage/v1/object/public/pet-photos/pets/9e581f05-a5c0-47e9-93d4-fd1eeafd8d1d-425e1a54-5a65-4b36-ad27-eee6e50a484f.webp?",
+    "species_id": "f9739579-973f-4bc6-ad71-c516489bc6cc",
+    "species_name": "Caballo",
+    "breed_id": "4a7a5f06-ed50-42a3-9651-a0c4682a8227",
+    "breed_name": "Andaluz",
+    "has_pedigree": true,
+    "sex": "F",
+    "dnia": "ARCABAN0000001",
+    "age_years": 2,
+    "owner_id": "d9a31539-c377-467a-99e2-787ef3c96807",
+    "city": "Pehuajó",
+    "country": "AR"
+  }
+]

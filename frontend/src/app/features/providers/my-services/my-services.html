@@ -1,0 +1,333 @@
+<div class="my-services-container">
+  <div class="header">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1>Registrar Servicios</h1>
+    </div>
+    <button class="btn-add" (click)="openAddForm()" [disabled]="loading()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      Agregar Servicio
+    </button>
+  </div>
+
+  @if (error()) {
+    <div class="error-message">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      {{ error() }}
+    </div>
+  }
+
+  @if (loading() && services().length === 0) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Cargando servicios...</p>
+    </div>
+  } @else if (services().length === 0) {
+    <div class="empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </svg>
+      <h2>No tenés servicios registrados</h2>
+      <p>Agregá los servicios que ofrecés para que los usuarios puedan contactarte</p>
+      <button class="btn-primary" (click)="openAddForm()">
+        Agregar Primer Servicio
+      </button>
+    </div>
+  } @else {
+    <div class="services-grid">
+      @for (service of paginatedServices(); track service.id) {
+        <div class="service-card" [class.inactive]="!service.active">
+          <div class="service-header">
+            <div class="service-title">
+              @if (service.service_type?.icon) {
+                <span class="service-icon">{{ service.service_type?.icon }}</span>
+              }
+              <div>
+                <h3>{{ service.custom_name }}</h3>
+                @if (service.service_type?.name) {
+                  <small class="service-type-name">{{ service.service_type?.name }}</small>
+                }
+                <span class="service-category">{{ categoryNames[service.service_type?.category || ''] || service.service_type?.category }}</span>
+              </div>
+            </div>
+            <div class="service-actions">
+              <button class="btn-icon" (click)="openEditForm(service)" title="Editar" [disabled]="loading()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </button>
+              <button class="btn-icon btn-danger" (click)="openDeleteModal(service)" title="Eliminar" [disabled]="loading()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          @if (service.custom_description || service.service_type?.description) {
+            <p class="service-description">{{ service.custom_description || service.service_type?.description }}</p>
+          }
+
+          @if (service.notes) {
+            <p class="service-notes">
+              <strong>Notas internas:</strong> {{ service.notes }}
+            </p>
+          }
+
+          <div class="service-footer">
+            <label class="toggle-switch">
+              <input type="checkbox" [checked]="service.active" (change)="toggleServiceStatus(service)" [disabled]="loading()">
+              <span class="slider"></span>
+            </label>
+            <span class="status-text">{{ service.active ? 'Activo' : 'Inactivo' }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1) {
+      <div class="pagination">
+        <button
+          class="btn-page"
+          (click)="prevPage()"
+          [disabled]="currentPage() === 1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Anterior
+        </button>
+
+        <div class="page-numbers">
+          @for (page of [].constructor(totalPages()); track $index) {
+            <button
+              class="btn-page-number"
+              [class.active]="currentPage() === $index + 1"
+              (click)="goToPage($index + 1)">
+              {{ $index + 1 }}
+            </button>
+          }
+        </div>
+
+        <button
+          class="btn-page"
+          (click)="nextPage()"
+          [disabled]="currentPage() === totalPages()">
+          Siguiente
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    }
+  }
+
+  <!-- Modal for Add/Edit Service -->
+  @if (showAddForm()) {
+    <div class="modal-overlay" (click)="closeForm()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>{{ editingService() ? 'Editar Servicio' : 'Nuevo Servicio' }}</h2>
+          <button class="btn-close" (click)="closeForm()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <form class="service-form" (submit)="$event.preventDefault(); saveService()">
+          <!-- Service Name (required, first field) -->
+          <div class="form-group">
+            <label for="service_name">Nombre Servicio *</label>
+            <input
+              type="text"
+              id="service_name"
+              [(ngModel)]="formData.service_name"
+              name="service_name"
+              placeholder="Ej: Consulta Veterinaria a Domicilio"
+              required>
+          </div>
+
+          <!-- Category Selection (only when creating) -->
+          @if (!editingService()) {
+            <div class="form-group">
+              <label for="category">Categoría *</label>
+              <select
+                id="category"
+                [(ngModel)]="formData.category"
+                name="category"
+                (ngModelChange)="onCategoryChange()"
+                required>
+                <option value="">Seleccioná una categoría...</option>
+                @for (category of availableCategories(); track category) {
+                  <option [value]="category">
+                    {{ categoryNames[category] }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            <!-- Service Types Selection (collapsible checkboxes) -->
+            @if (formData.category) {
+              <div class="form-group">
+                <label>Servicios que ofrecés en esta categoría *</label>
+                <small class="form-hint">Seleccioná uno o más servicios</small>
+                <details class="services-dropdown">
+                  <summary class="dropdown-summary">
+                    @if (formData.service_type_ids.length === 0) {
+                      <span class="placeholder-text">Seleccioná servicios...</span>
+                    } @else {
+                      <span class="selected-count">{{ formData.service_type_ids.length }} servicio(s) seleccionado(s)</span>
+                    }
+                    <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                      <path d="M4 6l4 4 4-4z"/>
+                    </svg>
+                  </summary>
+                  <div class="services-checkboxes">
+                    @for (type of availableServiceTypesForCategory(); track type.id) {
+                      <label class="checkbox-service">
+                        <input
+                          type="checkbox"
+                          [value]="type.id"
+                          [checked]="formData.service_type_ids.includes(type.id)"
+                          (change)="onServiceTypeToggle(type.id, $event)">
+                        <span class="service-icon-small">{{ type.icon }}</span>
+                        <span class="service-checkbox-label">{{ type.name }}</span>
+                      </label>
+                    }
+                  </div>
+                </details>
+              </div>
+            }
+          } @else {
+            <!-- Show service type when editing (read-only) -->
+            <div class="form-group">
+              <label>Categoría</label>
+              <div class="readonly-field">
+                {{ categoryNames[formData.category] }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tipo de Servicio</label>
+              <div class="readonly-field">
+                {{ editingService()?.service_type?.icon }} {{ editingService()?.service_type?.name }}
+                <small>(No se puede cambiar el tipo de servicio)</small>
+              </div>
+            </div>
+          }
+
+          <!-- Description (optional) -->
+          <div class="form-group">
+            <label for="custom_description">Descripción (opcional)</label>
+            <textarea
+              id="custom_description"
+              [(ngModel)]="formData.custom_description"
+              name="custom_description"
+              placeholder="Agregá detalles específicos de tu servicio..."
+              rows="4"></textarea>
+          </div>
+
+          <!-- Website URL (optional) -->
+          <div class="form-group">
+            <label for="website_url">Página Web (opcional)</label>
+            <input
+              type="url"
+              id="website_url"
+              [(ngModel)]="formData.website_url"
+              name="website_url"
+              placeholder="https://www.ejemplo.com">
+          </div>
+
+          <!-- Instagram (optional) -->
+          <div class="form-group">
+            <label for="instagram">Instagram (opcional)</label>
+            <input
+              type="text"
+              id="instagram"
+              [(ngModel)]="formData.instagram"
+              name="instagram"
+              placeholder="@usuario o https://instagram.com/usuario">
+          </div>
+
+          <!-- Active toggle (only when editing) -->
+          @if (editingService()) {
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="formData.active"
+                  name="active">
+                <span>Servicio activo</span>
+              </label>
+            </div>
+          }
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="closeForm()" [disabled]="loading()">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary" [disabled]="loading()">
+              @if (loading()) {
+                <span class="spinner-small"></span>
+              }
+              {{ editingService() ? 'Guardar Cambios' : 'Agregar Servicio' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Delete Confirmation Modal -->
+  @if (showDeleteModal()) {
+    <div class="modal-overlay" (click)="closeDeleteModal()">
+      <div class="modal-content modal-confirm" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div class="icon-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h2>¿Eliminar servicio?</h2>
+        </div>
+
+        <div class="modal-body">
+          <p class="confirm-message">
+            ¿Estás seguro de eliminar el servicio
+            <strong>"{{ serviceToDelete()?.custom_name || serviceToDelete()?.service_type?.name }}"</strong>?
+          </p>
+          <p class="confirm-warning">Esta acción no se puede deshacer.</p>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="closeDeleteModal()" [disabled]="loading()">
+            Cancelar
+          </button>
+          <button type="button" class="btn-danger" (click)="confirmDelete()" [disabled]="loading()">
+            @if (loading()) {
+              <span class="spinner-small"></span>
+            }
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

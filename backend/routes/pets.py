@@ -530,3 +530,106 @@ def get_pet_boardings(pet_id):
         import traceback
         traceback.print_exc()
         return {'error': 'Failed to get boardings', 'message': str(e)}, 400
+
+# ==========================================================
+# QR DINÁMICO - Endpoints
+# ==========================================================
+
+@pets_bp.route('/<pet_id>/qr', methods=['GET'])
+@require_auth
+def get_pet_qr(pet_id):
+    """
+    Get active QR code for pet (generates new one if none exists)
+    Only pet owner can get QR
+    """
+    try:
+        # Verify ownership
+        pet_check = supabase_admin.table('pets')\
+            .select('owner_id, name')\
+            .eq('id', pet_id)\
+            .eq('is_deleted', False)\
+            .single()\
+            .execute()
+
+        if not pet_check.data:
+            return {'error': 'Pet not found'}, 404
+
+        if pet_check.data['owner_id'] != g.user_id:
+            return {'error': 'Not your pet'}, 403
+
+        # Try to get active QR
+        active_qr = supabase_admin.rpc('get_active_qr', {
+            'p_pet_id': pet_id
+        }).execute()
+
+        if active_qr.data and len(active_qr.data) > 0:
+            qr_data = active_qr.data[0]
+            return {
+                'qr_code': qr_data['qr_code'],
+                'qr_id': qr_data['qr_id'],
+                'expires_at': qr_data['expires_at'],
+                'created_at': qr_data['created_at'],
+                'pet_name': pet_check.data['name']
+            }, 200
+        else:
+            # Generate new QR if none exists
+            new_qr = supabase_admin.rpc('generate_dynamic_qr', {
+                'p_pet_id': pet_id
+            }).execute()
+
+            if new_qr.data and len(new_qr.data) > 0:
+                qr_data = new_qr.data[0]
+                return {
+                    'qr_code': qr_data['qr_code'],
+                    'qr_id': qr_data['qr_id'],
+                    'pet_name': pet_check.data['name'],
+                    'is_new': True
+                }, 201
+            else:
+                return {'error': 'Failed to generate QR'}, 500
+
+    except Exception as e:
+        print(f'[PETS/QR] Error getting QR: {str(e)}')
+        return {'error': 'Failed to get QR', 'message': str(e)}, 400
+
+@pets_bp.route('/<pet_id>/qr/regenerate', methods=['POST'])
+@require_auth
+def regenerate_pet_qr(pet_id):
+    """
+    Regenerate QR code for pet (invalidates old one)
+    Only pet owner can regenerate QR
+    """
+    try:
+        # Verify ownership
+        pet_check = supabase_admin.table('pets')\
+            .select('owner_id, name')\
+            .eq('id', pet_id)\
+            .eq('is_deleted', False)\
+            .single()\
+            .execute()
+
+        if not pet_check.data:
+            return {'error': 'Pet not found'}, 404
+
+        if pet_check.data['owner_id'] != g.user_id:
+            return {'error': 'Not your pet'}, 403
+
+        # Generate new QR (this invalidates old ones)
+        new_qr = supabase_admin.rpc('generate_dynamic_qr', {
+            'p_pet_id': pet_id
+        }).execute()
+
+        if new_qr.data and len(new_qr.data) > 0:
+            qr_data = new_qr.data[0]
+            return {
+                'qr_code': qr_data['qr_code'],
+                'qr_id': qr_data['qr_id'],
+                'pet_name': pet_check.data['name'],
+                'message': 'QR regenerated successfully'
+            }, 201
+        else:
+            return {'error': 'Failed to regenerate QR'}, 500
+
+    except Exception as e:
+        print(f'[PETS/QR] Error regenerating QR: {str(e)}')
+        return {'error': 'Failed to regenerate QR', 'message': str(e)}, 400

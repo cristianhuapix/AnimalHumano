@@ -1,0 +1,143 @@
+<div class="nutrition-history-container container">
+  <div class="header">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1>Historial Nutricional</h1>
+    </div>
+    <button (click)="toggleForm()" class="btn-primary">
+      @if (showForm()) {
+        Cancelar
+      } @else {
+        + Nuevo Registro
+      }
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading">Cargando...</div>
+  }
+
+  @if (showForm()) {
+    <div class="form-card">
+      <h2>Registrar cambio de dieta</h2>
+
+      <div class="form-group">
+        <label for="pet">Mascota</label>
+        <select id="pet" [(ngModel)]="selectedPetId" class="form-control">
+          <option value="">Seleccionar mascota...</option>
+          @for (pet of pets(); track pet.id) {
+            <option [value]="pet.id">{{ pet.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Fecha</label>
+        <input
+          type="date"
+          id="date"
+          [(ngModel)]="entryDate"
+          class="form-control"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Comentarios sobre la dieta</label>
+        <textarea
+          id="comments"
+          [(ngModel)]="comments"
+          class="form-control"
+          rows="4"
+          placeholder="Ej: Cambio a alimento hipoalergénico marca X, 200g diarios dividido en 2 comidas..."
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button (click)="cancelForm()" class="btn-secondary">Cancelar</button>
+        <button
+          (click)="saveEntry()"
+          class="btn-primary"
+          [disabled]="!selectedPetId || !entryDate || !comments.trim()"
+        >
+          Guardar Registro
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (entries().length === 0 && !isLoading()) {
+    <div class="empty-state">
+      <div class="empty-icon">🍽️</div>
+      <h2>Sin registros</h2>
+      <p>Aún no hay registros de cambios en la dieta de tus mascotas.</p>
+      <button (click)="toggleForm()" class="btn-primary">Agregar primer registro</button>
+    </div>
+  } @else {
+    <div class="entries-list">
+      @for (entry of paginatedEntries(); track entry.id) {
+        <div class="entry-card">
+          <div class="entry-header">
+            <div class="pet-info">
+              <span class="pet-name">{{ entry.pet_name }}</span>
+              <span class="entry-date">{{ formatDate(entry.entry_date) }}</span>
+            </div>
+            <button (click)="confirmDelete(entry.id)" class="btn-delete" title="Eliminar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18"></path>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+          <p class="entry-comments">{{ entry.comments }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- Paginación -->
+    @if (totalPages() > 1) {
+      <div class="pagination">
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage() === 1"
+          class="pagination-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <span class="pagination-info">
+          Página {{ currentPage() }} de {{ totalPages() }}
+        </span>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage() === totalPages()"
+          class="pagination-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+    }
+  }
+</div>
+
+<!-- Modal de confirmación -->
+@if (showDeleteModal()) {
+  <div class="modal-overlay" (click)="cancelDelete()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-icon">🗑️</div>
+      <h3>¿Eliminar registro?</h3>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button (click)="cancelDelete()" class="btn-secondary">Cancelar</button>
+        <button (click)="deleteEntry()" class="btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}

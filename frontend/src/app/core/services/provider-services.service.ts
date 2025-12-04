@@ -102,8 +102,11 @@ export class ProviderServicesService {
 
   /**
    * Register QR access for a pet with a specific service
+   * @param petId - The pet ID
+   * @param serviceId - The provider service ID
+   * @param qrToken - Optional dynamic QR token for one-time use validation
    */
-  async registerQrAccess(petId: string, serviceId: string): Promise<{
+  async registerQrAccess(petId: string, serviceId: string, qrToken?: string): Promise<{
     message: string;
     pet_id: string;
     pet_name: string;
@@ -112,7 +115,14 @@ export class ProviderServicesService {
     is_simple_service: boolean;
     expires_in_hours: number
   }> {
-    return await lastValueFrom(this.api.post(`providers/me/qr-access`, { pet_id: petId, service_id: serviceId }));
+    const payload: { pet_id: string; service_id: string; qr_token?: string } = {
+      pet_id: petId,
+      service_id: serviceId
+    };
+    if (qrToken) {
+      payload.qr_token = qrToken;
+    }
+    return await lastValueFrom(this.api.post(`providers/me/qr-access`, payload));
   }
 
   /**

@@ -6,42 +6,42 @@
           <path d="m15 18-6-6 6-6"></path>
         </svg>
       </button>
-      <h1>Mis Paseos</h1>
+      <h1>Paseos de Mascotas</h1>
     </div>
   </div>
 
-  @if (loading()) {
+  @if (isLoading()) {
     <div class="loading">Cargando...</div>
   }
 
-  @if (error()) {
-    <div class="error-message">{{ error() }}</div>
+  @if (errorMessage()) {
+    <div class="error-message">{{ errorMessage() }}</div>
   }
 
-  @if (items().length === 0 && !loading()) {
+  @if (walks().length === 0 && !isLoading()) {
     <div class="empty-state">
-      <div class="empty-icon">🐕</div>
+      <div class="empty-icon">🐕‍🦺</div>
       <h2>Sin paseos registrados</h2>
-      <p>Los paseos aparecerán aquí cuando tus clientes los programen.</p>
+      <p>Aún no hay paseos registrados para tus mascotas.</p>
     </div>
-  } @else if (!loading()) {
+  } @else if (!isLoading()) {
     <div class="table-container">
       <table class="walks-table">
         <thead>
           <tr>
             <th>Mascota</th>
-            <th>Dueño</th>
+            <th>Paseador</th>
             <th>Fecha</th>
             <th>Notas</th>
           </tr>
         </thead>
         <tbody>
-          @for (item of items(); track item.id) {
+          @for (walk of walks(); track walk.id) {
             <tr>
-              <td>{{ item.pets?.name || 'N/A' }}</td>
-              <td>{{ item.pets?.owner_name || 'N/A' }}</td>
-              <td>{{ formatDate(item.created_at) }}</td>
-              <td class="notes-cell">{{ item.notes || '-' }}</td>
+              <td>{{ walk.pets?.name || 'N/A' }}</td>
+              <td>{{ walk.walker?.profile?.full_name || 'N/A' }}</td>
+              <td>{{ formatDate(walk.created_at) }}</td>
+              <td class="notes-cell">{{ walk.notes || '-' }}</td>
             </tr>
           }
         </tbody>
@@ -52,7 +52,7 @@
     @if (totalPages() > 1) {
       <div class="pagination">
         <button
-          (click)="goToPage(currentPage() - 1)"
+          (click)="prevPage()"
           [disabled]="currentPage() === 1"
           class="pagination-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -65,7 +65,7 @@
         </span>
 
         <button
-          (click)="goToPage(currentPage() + 1)"
+          (click)="nextPage()"
           [disabled]="currentPage() === totalPages()"
           class="pagination-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

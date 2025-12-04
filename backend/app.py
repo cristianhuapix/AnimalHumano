@@ -35,6 +35,7 @@ from routes.vaccines import vaccines_bp
 from routes.services import services_bp
 from routes.medical_records import medical_records_bp
 from routes.species_breed_requests import species_breed_requests_bp
+from routes.nutrition import nutrition_bp
 
 # Import middleware
 from middleware.auth import auth_middleware
@@ -72,6 +73,7 @@ def create_app():
     app.register_blueprint(services_bp, url_prefix='/api/services')
     app.register_blueprint(medical_records_bp, url_prefix='/api')
     app.register_blueprint(species_breed_requests_bp, url_prefix='/api/species-breed-requests')
+    app.register_blueprint(nutrition_bp, url_prefix='/api')
 
     # Register middleware
     app.before_request(auth_middleware)

@@ -58,6 +58,10 @@ export class PetsListComponent implements OnInit {
     this.router.navigate(['/pets', petId]);
   }
 
+  goBack(): void {
+    this.router.navigate(['/home']);
+  }
+
   getAge(birthDate: string): string {
     const birth = new Date(birthDate);
     const now = new Date();

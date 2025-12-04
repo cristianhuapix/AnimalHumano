@@ -490,7 +490,7 @@ def delete_my_service(service_id):
 def register_qr_access():
     """
     Register QR access for a provider to a pet
-    Creates a temporary access record (2 hours) with service context
+    Now validates dynamic QR token and marks it as used (one-time use)
     """
     data = request.json
     print(f"[QR ACCESS] Received data: {data}")
@@ -505,7 +505,8 @@ def register_qr_access():
         provider_id = g.provider_id
         pet_id = data['pet_id']
         service_id = data['service_id']
-        print(f"[QR ACCESS] Processing - provider_id: {provider_id}, pet_id: {pet_id}, service_id: {service_id}")
+        qr_token = data.get('qr_token')  # Optional: dynamic QR token
+        print(f"[QR ACCESS] Processing - provider_id: {provider_id}, pet_id: {pet_id}, service_id: {service_id}, qr_token: {qr_token[:20] if qr_token else 'None'}...")
 
         # Verify the service belongs to this provider
         service = supabase_admin.table('provider_services')\
@@ -519,7 +520,7 @@ def register_qr_access():
             return {'error': 'Service not found or does not belong to you'}, 403
 
         # Verify the pet exists
-        pet = supabase.table('pets')\
+        pet = supabase_admin.table('pets')\
             .select('id, name, owner_id')\
             .eq('id', pet_id)\
             .eq('is_deleted', False)\
@@ -529,30 +530,36 @@ def register_qr_access():
         if not pet.data:
             return {'error': 'Pet not found'}, 404
 
-        # Create QR scan record with service context
-        # Store service_id in metadata column
+        # QR token is REQUIRED - validate and consume it (one-time use)
+        if not qr_token:
+            print(f"[QR ACCESS ERROR] No QR token provided")
+            return {'error': 'Se requiere un código QR válido. Pida al dueño que genere uno nuevo.'}, 400
+
+        # Use the validate_and_use_qr function to validate and mark as used
+        service_category = service.data['service_type']['category']
+        scan_type = 'veterinary' if service_category == 'veterinary' else 'general'
+
+        qr_result = supabase_admin.rpc('validate_and_use_qr', {
+            'p_pet_id': pet_id,
+            'p_qr_code': qr_token,
+            'p_scanned_by': str(g.user_id),
+            'p_scan_type': scan_type
+        }).execute()
+
+        if qr_result.data and len(qr_result.data) > 0:
+            qr_valid = qr_result.data[0].get('valid', False)
+            if not qr_valid:
+                print(f"[QR ACCESS ERROR] QR token invalid or already used")
+                return {'error': 'Código QR inválido, ya usado o expirado. Pida al dueño que genere uno nuevo.'}, 400
+            print(f"[QR ACCESS] QR token validated and consumed successfully")
+        else:
+            print(f"[QR ACCESS ERROR] QR validation failed - no result")
+            return {'error': 'Error al validar el código QR'}, 400
+
         service_category = service.data['service_type']['category']
         service_name = service.data.get('custom_name') or service.data['service_type'].get('name', 'Unknown')
         print(f"[QR ACCESS] Service category: {service_category}")
         print(f"[QR ACCESS] Service name: {service_name}")
-
-        scan_data = {
-            'pet_id': pet_id,
-            'scanned_by': str(g.user_id),
-            'scan_type': 'general',  # Allowed values: veterinary, walk_start, walk_end, general
-            'metadata': {
-                'service_id': service_id,
-                'service_type_id': service.data['service_type_id'],
-                'service_name': service.data.get('custom_name') or service.data['service_type']['name'],
-                'service_category': service_category,
-                'provider_id': provider_id,
-                'scanned_as': 'provider'  # Mark that this was a provider scan
-            }
-        }
-
-        scan = supabase_admin.table('qr_scans').insert(scan_data).execute()
-
-        print(f"[QR ACCESS] Created scan record: {scan.data[0]['id']}")
 
         # Determine if this is a simple service (just notes) or complex (like boarding)
         simple_categories = ['grooming', 'petshop', 'shelter', 'training', 'walking']
@@ -562,10 +569,11 @@ def register_qr_access():
             'message': 'Access granted',
             'pet_id': pet_id,
             'pet_name': pet.data['name'],
-            'scan_id': scan.data[0]['id'],
+            'scan_id': 'dynamic_qr',
             'service_category': service_category,
             'is_simple_service': is_simple_service,
-            'expires_in_hours': 2
+            'expires_in_hours': 2,
+            'qr_consumed': bool(qr_token)
         }, 201
 
     except Exception as e:

@@ -5,6 +5,7 @@ import { PetService } from '../../../core/services/pet.service';
 import { Pet } from '../../../core/models';
 import { AuthService } from '../../../core/services/auth.service';
 import { ModeService } from '../../../core/services/mode.service';
+import { QrService } from '../../../core/services/qr.service';
 import * as QRCode from 'qrcode';
 
 @Component({
@@ -19,6 +20,7 @@ export class PetDetailComponent implements OnInit {
   private router = inject(Router);
   private authService = inject(AuthService);
   private modeService = inject(ModeService);
+  private qrService = inject(QrService);
 
   pet = signal<Pet | null>(null);
   isLoading = signal(false);
@@ -29,6 +31,8 @@ export class PetDetailComponent implements OnInit {
   showCameraModal = signal(false);
   showQRModal = signal(false);
   qrCodeDataUrl = signal<string>('');
+  qrLoading = signal(false);
+  qrExpiresAt = signal<string | null>(null);
   stream: MediaStream | null = null;
   hasProviderAccess = signal(false);
   providerServiceCategory = signal<string | null>(null);
@@ -411,10 +415,17 @@ export class PetDetailComponent implements OnInit {
   async showQR() {
     if (!this.petId) return;
 
+    this.qrLoading.set(true);
+    this.showQRModal.set(true);
+
     try {
-      // Generate QR code with pet URL
-      const petUrl = `${window.location.origin}/pets/${this.petId}`;
-      const qrDataUrl = await QRCode.toDataURL(petUrl, {
+      // Get dynamic QR from backend
+      const qrData = await this.qrService.getActiveQr(this.petId);
+
+      // Generate QR code image from the dynamic code
+      // The QR contains the pet URL + dynamic token
+      const qrContent = `${window.location.origin}/pets/${this.petId}?qr=${qrData.qr_code}`;
+      const qrDataUrl = await QRCode.toDataURL(qrContent, {
         width: 400,
         margin: 2,
         color: {
@@ -424,15 +435,49 @@ export class PetDetailComponent implements OnInit {
       });
 
       this.qrCodeDataUrl.set(qrDataUrl);
-      this.showQRModal.set(true);
-    } catch (error) {
+      this.qrExpiresAt.set(qrData.expires_at || null);
+    } catch (error: any) {
       console.error('Error generating QR code:', error);
-      this.errorMessage.set('Error al generar código QR');
+      this.errorMessage.set(error.error?.error || 'Error al generar código QR');
+      this.showQRModal.set(false);
+    } finally {
+      this.qrLoading.set(false);
+    }
+  }
+
+  async regenerateQR() {
+    if (!this.petId) return;
+
+    this.qrLoading.set(true);
+
+    try {
+      // Regenerate QR (invalidates old one)
+      const qrData = await this.qrService.regenerateQr(this.petId);
+
+      // Generate new QR code image
+      const qrContent = `${window.location.origin}/pets/${this.petId}?qr=${qrData.qr_code}`;
+      const qrDataUrl = await QRCode.toDataURL(qrContent, {
+        width: 400,
+        margin: 2,
+        color: {
+          dark: '#2c3e50',
+          light: '#ffffff'
+        }
+      });
+
+      this.qrCodeDataUrl.set(qrDataUrl);
+      this.qrExpiresAt.set(null); // New QR, reset expiry display
+    } catch (error: any) {
+      console.error('Error regenerating QR code:', error);
+      this.errorMessage.set(error.error?.error || 'Error al regenerar código QR');
+    } finally {
+      this.qrLoading.set(false);
     }
   }
 
   closeQRModal() {
     this.showQRModal.set(false);
+    this.qrExpiresAt.set(null);
   }
 
   downloadQR() {

@@ -3,7 +3,7 @@ Walks routes (PRD Section 12)
 """
 
 from flask import Blueprint, request, g
-from config import supabase
+from config import supabase_admin
 from middleware.auth import require_auth, require_provider
 
 walks_bp = Blueprint('walks', __name__)
@@ -21,7 +21,7 @@ def get_walks():
 
     try:
         # Check if user is a walker
-        walker_provider = supabase.table('providers')\
+        walker_provider = supabase_admin.table('providers')\
             .select('id')\
             .eq('profile_id', g.user_id)\
             .eq('service_type', 'walker')\
@@ -32,14 +32,14 @@ def get_walks():
             # User is a walker - show their walks
             walker_id = walker_provider.data[0]['id']
 
-            count_result = supabase.table('walks')\
+            count_result = supabase_admin.table('walks')\
                 .select('id', count='exact')\
                 .eq('walker_id', walker_id)\
                 .execute()
 
             total = count_result.count
 
-            walks = supabase.table('walks')\
+            walks = supabase_admin.table('walks')\
                 .select('*, pets(name, photo_url, dnia, owner:profiles(full_name))')\
                 .eq('walker_id', walker_id)\
                 .order('created_at', desc=True)\
@@ -48,7 +48,7 @@ def get_walks():
 
         else:
             # User is a pet owner - show their pets' walks
-            my_pets = supabase.table('pets')\
+            my_pets = supabase_admin.table('pets')\
                 .select('id')\
                 .eq('owner_id', g.user_id)\
                 .eq('is_deleted', False)\
@@ -59,14 +59,14 @@ def get_walks():
             if not pet_ids:
                 return {'data': [], 'pagination': {'page': 1, 'page_size': page_size, 'total': 0, 'pages': 0}}, 200
 
-            count_result = supabase.table('walks')\
+            count_result = supabase_admin.table('walks')\
                 .select('id', count='exact')\
                 .in_('pet_id', pet_ids)\
                 .execute()
 
             total = count_result.count
 
-            walks = supabase.table('walks')\
+            walks = supabase_admin.table('walks')\
                 .select('*, pets(name, photo_url, dnia), walker:providers(*, profile:profiles(full_name))')\
                 .in_('pet_id', pet_ids)\
                 .order('created_at', desc=True)\
@@ -102,7 +102,7 @@ def start_walk():
 
     try:
         # Get walker provider ID
-        walker = supabase.table('providers')\
+        walker = supabase_admin.table('providers')\
             .select('id')\
             .eq('profile_id', g.user_id)\
             .eq('service_type', 'walker')\
@@ -114,7 +114,7 @@ def start_walk():
             return {'error': 'Not registered as walker'}, 403
 
         # Use database function to start walk
-        result = supabase.rpc('start_walk', {
+        result = supabase_admin.rpc('start_walk', {
             'p_pet_id': data['pet_id'],
             'p_walker_id': walker.data['id'],
             'p_qr_code': data['qr_code']
@@ -123,7 +123,7 @@ def start_walk():
         walk_id = result.data
 
         # Get walk details
-        walk = supabase.table('walks')\
+        walk = supabase_admin.table('walks')\
             .select('*, pets(name, photo_url, dnia, owner:profiles(full_name))')\
             .eq('id', walk_id)\
             .single()\
@@ -152,13 +152,13 @@ def end_walk():
 
     try:
         # Use database function to end walk
-        result = supabase.rpc('end_walk', {
+        result = supabase_admin.rpc('end_walk', {
             'p_walk_id': data['walk_id'],
             'p_qr_code': data['qr_code']
         }).execute()
 
         # Get walk details
-        walk = supabase.table('walks')\
+        walk = supabase_admin.table('walks')\
             .select('*, pets(name, photo_url, dnia, owner:profiles(full_name))')\
             .eq('id', data['walk_id'])\
             .single()\
@@ -176,7 +176,7 @@ def end_walk():
 def get_walk(walk_id):
     """Get walk details"""
     try:
-        walk = supabase.table('walks')\
+        walk = supabase_admin.table('walks')\
             .select('*, pets(name, photo_url, dnia, owner_id), walker:providers(*, profile:profiles(full_name, profile_id))')\
             .eq('id', walk_id)\
             .single()\
@@ -203,7 +203,7 @@ def autoclose_walks():
     """
     # TODO: Add API key authentication for cron jobs
     try:
-        result = supabase.rpc('autoclose_walks').execute()
+        result = supabase_admin.rpc('autoclose_walks').execute()
         closed_count = result.data
 
         return {
@@ -225,14 +225,14 @@ def add_walk_notes(walk_id):
 
     try:
         # Get walk
-        walk = supabase.table('walks')\
+        walk = supabase_admin.table('walks')\
             .select('walker_id')\
             .eq('id', walk_id)\
             .single()\
             .execute()
 
         # Verify walker
-        walker = supabase.table('providers')\
+        walker = supabase_admin.table('providers')\
             .select('profile_id')\
             .eq('id', walk.data['walker_id'])\
             .single()\
@@ -242,7 +242,7 @@ def add_walk_notes(walk_id):
             return {'error': 'Not your walk'}, 403
 
         # Update notes
-        result = supabase.table('walks')\
+        result = supabase_admin.table('walks')\
             .update({'notes': data['notes']})\
             .eq('id', walk_id)\
             .execute()

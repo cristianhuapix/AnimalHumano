@@ -54,6 +54,21 @@ export const routes: Routes = [
     loadComponent: () => import('./features/conversations/conversations').then(m => m.Conversations)
   },
   {
+    path: 'help-resources',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/help-resources/help-resources').then(m => m.HelpResourcesComponent)
+  },
+  {
+    path: 'nutrition-history',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/nutrition-history/nutrition-history').then(m => m.NutritionHistoryComponent)
+  },
+  {
+    path: 'walks',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/walks-history/walks-history').then(m => m.WalksHistoryComponent)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }

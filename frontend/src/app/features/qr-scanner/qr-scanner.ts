@@ -164,11 +164,13 @@ export class QrScannerComponent implements OnInit, OnDestroy {
       await this.stopScanning();
       this.isScanning.set(false);
 
-      // El QR contiene la URL completa de la mascota, ej: http://localhost:4200/pets/6367c06c-a0eb-4935-bfaa-d6a1527634cf
-      // Extraer el ID de la mascota
+      // El QR contiene la URL completa de la mascota con token dinámico
+      // ej: http://localhost:4200/pets/6367c06c-a0eb-4935-bfaa-d6a1527634cf?qr=abc123...
+      // Extraer el ID de la mascota y el token QR
       const url = new URL(decodedText);
       const pathParts = url.pathname.split('/');
       const petId = pathParts[pathParts.length - 1];
+      const qrToken = url.searchParams.get('qr'); // Token dinámico
 
       if (!petId) {
         this.errorMessage.set('Código QR inválido');
@@ -181,9 +183,9 @@ export class QrScannerComponent implements OnInit, OnDestroy {
         return;
       }
 
-      // Registrar acceso en el backend
-      console.log('[QR SCANNER] Registrando acceso QR para pet:', petId, 'service:', selectedSvc.id);
-      const response = await this.providerServicesService.registerQrAccess(petId, selectedSvc.id);
+      // Registrar acceso en el backend con el token dinámico
+      console.log('[QR SCANNER] Registrando acceso QR para pet:', petId, 'service:', selectedSvc.id, 'token:', qrToken ? qrToken.substring(0, 20) + '...' : 'none');
+      const response = await this.providerServicesService.registerQrAccess(petId, selectedSvc.id, qrToken || undefined);
       console.log('[QR SCANNER] Respuesta del backend:', response);
 
       // Guardar acceso temporal en localStorage (expira en 2 horas)
@@ -257,8 +259,8 @@ export class QrScannerComponent implements OnInit, OnDestroy {
     } catch (error: any) {
       console.error('Error processing QR:', error);
       this.errorMessage.set(error.error?.error || 'Error al procesar el código QR');
-      this.isScanning.set(true);
-      this.startScanning();
+      this.isScanning.set(false);
+      // No reiniciar el escáner automáticamente - el usuario debe hacer click en Reintentar
     }
   }
 

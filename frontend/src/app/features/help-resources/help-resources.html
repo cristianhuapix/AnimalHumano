@@ -1,0 +1,33 @@
+<div class="help-resources-container container">
+  <div class="header">
+    <div class="header-left">
+      <button (click)="goBack()" class="btn-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <h1>Ayuda y Recursos</h1>
+    </div>
+  </div>
+
+  <p class="intro">
+    Información útil y recursos oficiales para el cuidado y traslado de tus mascotas.
+  </p>
+
+  <div class="resources-list">
+    @for (resource of resources; track resource.url) {
+      <article class="resource-card" (click)="openResource(resource.url)">
+        <div class="resource-icon">{{ resource.icon }}</div>
+        <div class="resource-content">
+          <h3>{{ resource.title }}</h3>
+          <p>{{ resource.description }}</p>
+          <span class="resource-source">
+            <span class="source-icon">🔗</span>
+            {{ resource.source }}
+          </span>
+        </div>
+        <div class="resource-arrow">→</div>
+      </article>
+    }
+  </div>
+</div>

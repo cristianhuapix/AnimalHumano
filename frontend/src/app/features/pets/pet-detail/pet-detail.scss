@@ -408,6 +408,28 @@
       align-items: center;
       gap: 1.5rem;
 
+      .qr-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 3rem;
+
+        .spinner {
+          width: 48px;
+          height: 48px;
+          border: 4px solid #ecf0f1;
+          border-top-color: #3498db;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        p {
+          color: #7f8c8d;
+          margin: 0;
+        }
+      }
+
       .qr-container {
         background: white;
         padding: 1rem;
@@ -423,47 +445,61 @@
 
       .qr-info {
         text-align: center;
-        color: #7f8c8d;
-        font-size: 0.95rem;
-        margin: 0;
         max-width: 350px;
+
+        .qr-description {
+          color: #7f8c8d;
+          font-size: 0.9rem;
+          margin: 0;
+          line-height: 1.5;
+
+          strong {
+            color: #e74c3c;
+          }
+        }
       }
-    }
 
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.75rem;
-      padding: 1.5rem;
-      border-top: 1px solid #ecf0f1;
-
-      button {
-        padding: 0.625rem 1.25rem;
-        border-radius: 6px;
-        font-size: 0.95rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s;
-        border: none;
+      .qr-actions {
         display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
 
-        &.btn-cancel {
-          background: #ecf0f1;
-          color: #2c3e50;
+        button {
+          padding: 0.75rem 1.25rem;
+          border-radius: 8px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+          border: none;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
 
-          &:hover {
-            background: #d5dbdb;
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
           }
         }
 
-        &.btn-download {
+        .btn-regenerate {
+          background: #27ae60;
+          color: white;
+
+          &:hover:not(:disabled) {
+            background: #219a52;
+            transform: translateY(-1px);
+          }
+        }
+
+        .btn-download {
           background: #3498db;
           color: white;
 
-          &:hover {
+          &:hover:not(:disabled) {
             background: #2980b9;
+            transform: translateY(-1px);
           }
         }
       }

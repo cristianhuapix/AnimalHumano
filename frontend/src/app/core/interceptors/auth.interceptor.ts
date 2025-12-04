@@ -8,8 +8,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   console.log('[AuthInterceptor] Request:', req.method, req.url);
 
-  // Skip adding token for auth endpoints
-  if (req.url.includes('/auth/') || req.url.includes('/data/')) {
+  // Skip adding token for public auth endpoints (login, register, etc.)
+  // But NOT for /auth/me which requires authentication
+  const publicAuthEndpoints = ['/auth/login', '/auth/register', '/auth/reset-password', '/auth/refresh'];
+  const isPublicAuthEndpoint = publicAuthEndpoints.some(endpoint => req.url.includes(endpoint));
+
+  if (isPublicAuthEndpoint || req.url.includes('/data/')) {
     console.log('[AuthInterceptor] Skipping auth for public endpoint');
     return next(req);
   }

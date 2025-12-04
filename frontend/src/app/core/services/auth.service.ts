@@ -11,7 +11,16 @@ let supabaseInstance: SupabaseClient | null = null;
 
 function getSupabaseClient(): SupabaseClient {
   if (!supabaseInstance) {
-    supabaseInstance = createClient(environment.supabaseUrl, environment.supabaseKey);
+    supabaseInstance = createClient(environment.supabaseUrl, environment.supabaseKey, {
+      auth: {
+        // Disable lock to prevent NavigatorLockAcquireTimeoutError
+        lock: async (name: string, acquireTimeout: number, fn: () => Promise<any>) => {
+          return await fn();
+        },
+        persistSession: true,
+        autoRefreshToken: true,
+      }
+    });
   }
   return supabaseInstance;
 }
@@ -184,18 +193,28 @@ export class AuthService {
       return this.cachedToken;
     }
 
-    console.log('AuthService.getAccessToken - Fetching new session');
-    const session = await this.getSession();
-    console.log('AuthService.getAccessToken - Session:', session);
-    console.log('AuthService.getAccessToken - Access Token:', session?.access_token ? `${session.access_token.substring(0, 20)}...` : 'NO TOKEN');
+    try {
+      console.log('AuthService.getAccessToken - Fetching new session');
+      const session = await this.getSession();
+      console.log('AuthService.getAccessToken - Session:', session);
+      console.log('AuthService.getAccessToken - Access Token:', session?.access_token ? `${session.access_token.substring(0, 20)}...` : 'NO TOKEN');
 
-    // Cache the token and its expiry
-    if (session?.access_token && session?.expires_at) {
-      this.cachedToken = session.access_token;
-      this.tokenExpiry = session.expires_at;
+      // Cache the token and its expiry
+      if (session?.access_token && session?.expires_at) {
+        this.cachedToken = session.access_token;
+        this.tokenExpiry = session.expires_at;
+      }
+
+      return session?.access_token || null;
+    } catch (error) {
+      console.warn('AuthService.getAccessToken - Error getting session, using cached token if available:', error);
+      // If we have a cached token (even if expired), return it as a fallback
+      // The server will reject it if truly invalid
+      if (this.cachedToken) {
+        return this.cachedToken;
+      }
+      return null;
     }
-
-    return session?.access_token || null;
   }
 
   /**

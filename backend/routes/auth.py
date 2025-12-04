@@ -136,7 +136,7 @@ def update_profile():
     # Fields that can be updated
     allowed_fields = [
         'first_name', 'last_name', 'full_name', 'phone',
-        'address', 'city', 'country', 'language', 'photo_url'
+        'address', 'city', 'country', 'language', 'photo_url', 'primary_email'
     ]
 
     update_data = {k: v for k, v in data.items() if k in allowed_fields}
@@ -180,3 +180,89 @@ def refresh_token():
         }, 200
     except Exception as e:
         return {'error': 'Refresh failed', 'message': str(e)}, 401
+
+@auth_bp.route('/change-password', methods=['POST'])
+@require_auth
+def change_password():
+    """Change user password"""
+    from flask import g
+    data = request.json
+
+    if 'current_password' not in data or 'new_password' not in data:
+        return {'error': 'Current password and new password required'}, 400
+
+    if len(data['new_password']) < 6:
+        return {'error': 'New password must be at least 6 characters'}, 400
+
+    try:
+        # Supabase handles password change through their auth API
+        # First verify current password by trying to sign in
+        profile = supabase.table('profiles').select('email').eq('id', g.user_id).single().execute()
+        user_email = profile.data['email']
+
+        # Verify current password
+        supabase.auth.sign_in_with_password({
+            'email': user_email,
+            'password': data['current_password']
+        })
+
+        # Update password
+        supabase.auth.update_user({'password': data['new_password']})
+
+        return {'message': 'Password updated successfully'}, 200
+    except Exception as e:
+        error_msg = str(e)
+        if 'Invalid login credentials' in error_msg:
+            return {'error': 'Current password is incorrect'}, 400
+        return {'error': 'Failed to change password', 'message': error_msg}, 400
+
+@auth_bp.route('/me/notifications', methods=['GET'])
+@require_auth
+def get_notification_settings():
+    """Get user notification settings"""
+    from flask import g
+
+    try:
+        # Get notification settings from profiles table
+        profile = supabase.table('profiles').select(
+            'notifications_enabled, vaccine_mandatory, vaccine_optional, '
+            'vaccine_days_before, birthday_notifications, chat_notifications, app_notifications'
+        ).eq('id', g.user_id).single().execute()
+
+        # Return defaults if not set
+        settings = profile.data or {}
+        return {
+            'notifications_enabled': settings.get('notifications_enabled', True),
+            'vaccine_mandatory': settings.get('vaccine_mandatory', True),
+            'vaccine_optional': settings.get('vaccine_optional', False),
+            'vaccine_days_before': settings.get('vaccine_days_before', 30),
+            'birthday_notifications': settings.get('birthday_notifications', True),
+            'chat_notifications': settings.get('chat_notifications', True),
+            'app_notifications': settings.get('app_notifications', True)
+        }, 200
+    except Exception as e:
+        return {'error': 'Failed to get notification settings', 'message': str(e)}, 400
+
+@auth_bp.route('/me/notifications', methods=['PUT'])
+@require_auth
+def update_notification_settings():
+    """Update user notification settings"""
+    from flask import g
+    data = request.json
+
+    # Fields that can be updated for notifications
+    allowed_fields = [
+        'notifications_enabled', 'vaccine_mandatory', 'vaccine_optional',
+        'vaccine_days_before', 'birthday_notifications', 'chat_notifications', 'app_notifications'
+    ]
+
+    update_data = {k: v for k, v in data.items() if k in allowed_fields}
+
+    if not update_data:
+        return {'error': 'No valid fields to update'}, 400
+
+    try:
+        profile = supabase.table('profiles').update(update_data).eq('id', g.user_id).execute()
+        return {'message': 'Notification settings updated successfully', 'data': profile.data[0]}, 200
+    except Exception as e:
+        return {'error': 'Failed to update notification settings', 'message': str(e)}, 400
